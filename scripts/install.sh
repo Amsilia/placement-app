@@ -1,11 +1,9 @@
 #!/bin/bash
-echo "=== INSTALL DEPENDENCIES BACKEND ==="
 
-cd /home/ubuntu/app/BE || exit
+# Jalankan di direktori project
+cd /home/ubuntu/placement-app/backend
+
+echo "📦 Installing dependencies..."
 npm install
 
-if [ -f ace ]; then
-  node ace migration:run
-else
-  echo "Skipping migration: ace not found"
-fi
+echo "✅ Install selesai."
