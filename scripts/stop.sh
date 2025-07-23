@@ -1,4 +1,8 @@
 #!/bin/bash
-echo "=== STOPPING BACKEND ==="
 
-pm2 stop backend-app || echo "PM2 process not found. Skipping stop."
+echo "🛑 Stopping existing app process..."
+
+# Cari dan kill proses Node.js (jika ada)
+pkill node || echo "No node process found."
+
+echo "✅ Stopped."
