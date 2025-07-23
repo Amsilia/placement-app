@@ -1,5 +1,10 @@
 #!/bin/bash
-echo "=== STARTING BACKEND ==="
 
-cd /home/ubuntu/app/BE || exit
-pm2 start server.js --name backend-app || npm run start
+# Masuk ke direktori backend
+cd /home/ubuntu/placement-app/backend
+
+echo "🚀 Starting app..."
+npm start > /home/ubuntu/placement-app/backend/app.log 2>&1 &
+
+echo "✅ App started."
+
