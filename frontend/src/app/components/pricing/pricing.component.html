@@ -1,0 +1,88 @@
+<div class="container mx-auto w-full px-4 md:px-11" id="pricing">
+  <div class="flex justify-between items-center mb-16 mx-11 my-3">
+    <div>
+      <h1 class="text-[28px] font-bold font-sora">
+        Pilih Paket Pelatihan yang Tepat untuk Anda!
+      </h1>
+      <p class="font-inter text-secondary text-[18px]">
+        Akses eksklusif pengembangan diri untuk menjadi profesional siap
+        bersaing di pasar global.
+      </p>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center py-10 text-blue-500">
+    Memuat paket pelatihan...
+  </div>
+  <div *ngIf="!isLoading && errorMessage" class="text-center py-10 text-red-500">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="!isLoading && !errorMessage && prices.length === 0" class="text-center py-10 text-gray-500">
+    Belum ada paket pelatihan yang tersedia.
+  </div>
+
+  <div
+    *ngIf="!isLoading && !errorMessage && prices.length > 0"
+    class="cards-container flex gap-12 overflow-x-auto scroll-smooth px-4 pb-4"
+  >
+    <div
+      *ngFor="let price of prices"
+      class="card w-1/3 min-w-[300px] cursor-pointer rounded-lg shadow-md p-6 relative transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-xl"
+      [ngClass]="price.special_condition ? 'bg-blue-500' : 'bg-gray-100'"
+    >
+      <div class="flex items-center mb-3">
+        <img
+          [src]="
+            price.special_condition
+              ? 'assets/image/icons/price-special.svg'
+              : 'assets/image/icons/price-normal.svg'
+          "
+          alt="Price Icon"
+          class="w-10 h-10 mr-2"
+        />
+        <h2
+          class="text-[25px] font-bold font-inter"
+          [ngClass]="price.special_condition ? 'text-white' : 'text-secondary'"
+        >
+          {{ price.name }}
+        </h2>
+      </div>
+
+      <div
+        class="text-sm space-y-2 mb-6"
+        [ngClass]="price.special_condition ? 'text-white' : ''"
+      >
+        <div *ngIf="price.package && price.package.description" [innerHTML]="price.package.description"></div>
+        <div *ngIf="!price.package || !price.package.description">
+          <p>Tidak ada deskripsi tersedia.</p>
+        </div>
+      </div>
+
+      <p
+        class="text-3xl font-bold mb-2"
+        [ngClass]="price.special_condition ? 'text-white' : ''"
+      >
+        {{ price.amount | currencyFormat }}
+      </p>
+      <p
+        class="text-xs font-bold mb-4"
+        *ngIf="price.special_condition"
+        [ngClass]="price.special_condition ? 'text-white' : ''"
+      >
+        *{{ price.special_condition }}
+      </p>
+
+      <button
+        (click)="navigateToPrice(price)"
+        class="w-full py-2 rounded-md font-semibold transition duration-300"
+        [ngClass]="
+          price.special_condition
+            ? 'bg-white text-blue-500 hover:bg-slate-200'
+            : 'bg-gray-600 text-white hover:bg-gray-700'
+        "
+      >
+        Daftar Sekarang
+      </button>
+    </div>
+  </div>
+</div>

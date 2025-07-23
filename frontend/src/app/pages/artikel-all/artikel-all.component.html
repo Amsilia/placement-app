@@ -1,0 +1,38 @@
+<!-- <app-navbar></app-navbar> -->
+<ng-container *ngIf="isUserLoggedIn; else guestNavbar">
+  <app-navbar-users></app-navbar-users>
+</ng-container>
+<ng-template #guestNavbar>
+  <app-navbar></app-navbar>
+</ng-template>
+
+<!-- Content Section -->
+<div class="container mx-auto mt-32 px-8">
+  <!-- Title and Description -->
+  <h1 class="text-[28px] font-sora font-semibold text-brith">Semua Artikel</h1>
+  <p class="text-secondary text-[18px] font-inter mt-2">
+    Berikut adalah daftar artikel yang bisa Anda jadikan referensi tambahan.
+  </p>
+
+  <!-- Breadcrumbs -->
+  <div class="flex items-center text-sm text-gray-600 mt-10">
+    <a
+      routerLink=""
+      class="text-secondary text-[16px] font-medium cursor-pointer"
+      >Beranda</a
+    >
+    <img
+      src="assets/image/icons/blck-chevronright.svg"
+      alt="chevron right"
+      class="mx-3"
+    />
+    <span
+      class="font-medium text-secondary text-[16px] font-inter cursor-pointer"
+      >Semua Artikel</span
+    >
+  </div>
+
+  <!-- All Blogs Component -->
+  <app-all-blogs></app-all-blogs>
+  <app-footer />
+</div>

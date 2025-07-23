@@ -1,0 +1,43 @@
+<header class="flex justify-between items-center bg-white shadow-md px-4 py-3">
+  <div class="flex items-center">
+    <!-- Placeholder for any left-side content -->
+  </div>
+  <div class="relative">
+    <!-- Icon Profile -->
+    <div
+      class="w-10 h-10 flex items-center justify-center bg-primary text-white font-bold rounded-xl cursor-pointer"
+      (click)="toggleDropdown()"
+    >
+      <img
+        *ngIf="profileImage"
+        [src]="profileImage"
+        alt="Profile Picture"
+        class="w-full h-full object-cover rounded-xl"
+      />
+      <span *ngIf="!profileImage">{{ initials }}</span>
+    </div>
+
+    <!-- Dropdown Menu -->
+    <div
+      *ngIf="isDropdownOpen"
+      class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border z-20"
+    >
+      <div class="p-3 border-b">
+        <p class="font-medium text-gray-700">{{ userName }}</p>
+        <p class="text-sm text-gray-500">{{ userEmail }}</p>
+      </div>
+      <button
+        (click)="navigateToProfile()"
+        class="w-full text-left hover:bg-gray-100 text-gray-700 block px-4 py-3 text-sm cursor-pointer border-b"
+      >
+        Profil
+      </button>
+      <button
+        (click)="logout()"
+        class="w-full text-left px-4 py-3 hover:bg-gray-100 text-red-600"
+      >
+        Keluar
+      </button>
+    </div>
+  </div>
+</header>

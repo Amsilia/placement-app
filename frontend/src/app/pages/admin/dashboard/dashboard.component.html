@@ -1,0 +1,164 @@
+<div class="grid grid-cols-[auto_1fr] h-screen bg-[#f1f5fc]">
+  <app-sidebar (sidebarToggle)="onSidebarToggle($event)"></app-sidebar>
+
+  <div
+    [ngClass]="isMinimized ? 'ml-[100px]' : 'ml-[300px]'"
+    class="transition-all duration-300 ease-in-out bg-[#f1f5fc]"
+  >
+    <app-header-admin></app-header-admin>
+    <div class="p-6">
+      <h1 class="text-[24px] text-brith font-semibold font-sora">Dashboard</h1>
+      <p class="text-[16px] text-brith font-inter">
+        Berikut Pusat Kontrol untuk Semua Aktivitas Anda
+      </p>
+
+      <!-- Grid Layout for Top Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 mb-6 my-8">
+        <!-- Pendaftar Pelatihan Card -->
+        <div class="bg-white shadow-lg p-6 w-[315px] h-[400px] rounded-lg">
+          <h2 class="text-[16px] font-medium text-secondary">
+            Pendaftar Pelatihan
+          </h2>
+          <div class="mx-2 mb-7 mt-2">
+            <p class="text-[30px] font-bold font-sora text-brith">
+              <span class="text-[16px] font-inter text-[#959EA9]"
+                >Total<br /></span
+              >{{ dashboardData.totalRegistrant }}
+            </p>
+          </div>
+          <ul class="mt-4 text-sm">
+            <li class="flex items-center mb-1">
+              <span
+                class="w-4 h-4 bg-yellow-500 inline-block rounded-md my-2 mr-2"
+              ></span
+              >Menunggu:
+              <span class="ml-auto font-medium">{{
+                dashboardData.registrantPerStatus.Menunggu
+              }}</span>
+            </li>
+            <li class="flex items-center mb-1">
+              <span
+                class="w-4 h-4 bg-green-500 inline-block rounded-md my-2 mr-2"
+              ></span
+              >Diterima:
+              <span class="ml-auto font-medium">{{
+                dashboardData.registrantPerStatus.Diterima
+              }}</span>
+            </li>
+            <li class="flex items-center mb-1">
+              <span
+                class="w-4 h-4 bg-red-500 inline-block rounded-md my-2 mr-2"
+              ></span
+              >Ditolak:
+              <span class="ml-auto font-medium">{{
+                dashboardData.registrantPerStatus.Ditolak
+              }}</span>
+            </li>
+            <li class="flex items-center mb-1">
+              <span
+                class="w-4 h-4 bg-blue-500 inline-block rounded-md my-2 mr-2"
+              ></span
+              >Berlangsung:
+              <span class="ml-auto font-medium">{{
+                dashboardData.registrantPerStatus.Berlangsung
+              }}</span>
+            </li>
+            <li class="flex items-center mb-1">
+              <span
+                class="w-4 h-4 bg-gray-500 inline-block rounded-md my-2 mr-2"
+              ></span
+              >Selesai:
+              <span class="ml-auto font-medium">{{
+                dashboardData.registrantPerStatus.Selesai
+              }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Grafik Pendaftar Card -->
+        <div class="bg-white shadow-lg p-6 rounded-lg w-[650px] h-[400px]">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-[16px] font-medium text-secondary mb-5">
+              Grafik Pendaftar
+            </h2>
+            <select
+              class="rounded-lg p-2 mb-4 cursor-pointer"
+              [(ngModel)]="selectedYear"
+              (change)="onYearChange($event)"
+            >
+              <option *ngFor="let year of availableYears" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+          <canvas id="registrationChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Jumlah Pendaftar Card -->
+      <div class="bg-white shadow-lg p-4 rounded-lg mb-6">
+        <div class="flex justify-between items-center mb-2">
+          <h2 class="text-[16px] font-medium text-secondary">
+            Jumlah Pendaftar
+          </h2>
+          <select
+            class="rounded-lg p-2 cursor-pointer"
+            [(ngModel)]="selectedBatch"
+            (change)="onBatchChange($event)"
+          >
+            <option *ngFor="let batch of availableBatches" [value]="batch">
+              {{ batch }}
+            </option>
+          </select>
+        </div>
+        <p class="text-[30px] font-sora font-bold text-brith mx-1">
+          {{ registrantsByBatch[0].total }}
+        </p>
+      </div>
+
+      <!-- 3 Cards in a Row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Jumlah Pendaftar Paket -->
+        <div class="bg-white shadow-lg p-6 rounded-lg">
+          <h2 class="text-[16px] font-medium text-secondary">
+            Jumlah Pendaftar Paket
+          </h2>
+          <ul class="mt-4">
+            <li class="flex items-center">
+              <span
+                class="text-[14px] text-secondary w-4 h-4 bg-blue-600 inline-block rounded-md my-2 mr-2"
+              ></span
+              >{{ registrantsByPackage[0].name }}:
+              <span class="ml-auto font-medium">{{ registrantsByPackage[0].total }}</span>
+            </li>
+            <!-- <li class="flex items-center">
+              <span
+                class="text-[14px] text-secondary w-4 h-4 bg-blue-300 inline-block rounded-md my-2 mr-2"
+              ></span
+              >Normal Price:
+              <span class="ml-auto font-medium">{{ dashboardData }}</span>
+            </li> -->
+          </ul>
+        </div>
+
+        <div class="bg-white shadow-lg p-6 mx-4 rounded-lg">
+          <h2 class="text-[16px] font-medium text-secondary">
+            Pengunjung Pendaftaran
+          </h2>
+          <p class="text-[30px] font-sora text-brith font-bold mt-4">
+            {{ dashboardData.articleVisitor }}
+          </p>
+        </div>
+
+        <div class="bg-white shadow-lg p-6 mx-4 rounded-lg">
+          <h2 class="text-[16px] font-medium text-secondary">
+            Pengunjung Artikel
+          </h2>
+          <p class="text-[30px] font-sora text-brith font-bold mt-4">
+            {{ dashboardData.articleVisitor }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,137 @@
+<nav
+  [@fadeSlide]
+  class="mx-auto h-[85px] p-2 fixed z-50 bg-white/50 backdrop-blur-md w-full"
+>
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center">
+        <a routerLink="/" class="flex items-center">
+          <img
+            src="assets/image/logo.png"
+            alt="Pis Logo"
+            class="h-full w-full ml-2"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <!-- <div class="hidden md:flex justify-end flex-1 mx-10">
+        <a (click)="scrollToSection('home')" class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer">Home</a>
+        <a (click)="scrollToSection('tantangan')" class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer">Tantangan</a>
+        <a (click)="scrollToSection('pricing')" class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer">Paket</a>
+        <a (click)="scrollToSection('testimonial')" class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer">Testimonial</a>
+        <a (click)="scrollToSection('blogger')" class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer">Artikel</a>
+      </div> -->
+      <div class="hidden md:flex justify-end flex-1 mx-10">
+        <a
+          (click)="navigateToSection('home')"
+          class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer"
+          >Home</a
+        >
+        <a
+          (click)="navigateToSection('tantangan')"
+          class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer"
+          >Tantangan</a
+        >
+        <a
+          (click)="navigateToSection('pricing')"
+          class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer"
+          >Paket</a
+        >
+        <a
+          (click)="navigateToSection('testimonial')"
+          class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer"
+          >Testimonial</a
+        >
+        <a
+          (click)="navigateToSection('blogger')"
+          class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer"
+          >Artikel</a
+        >
+      </div>
+
+      <!-- Profile Icon Section -->
+      <div class="flex items-center relative">
+        <!-- User Profile Icon or Initials -->
+        <button (click)="toggleProfileMenu()" class="focus:outline-none">
+          <!-- Show image if profileImage exists, otherwise show initials -->
+          <ng-container *ngIf="profileImage; else initialsBlock">
+            <img
+              [src]="profileImage"
+              alt="Profile Icon"
+              class="w-11 h-11 mt-3 rounded-lg object-cover"
+            />
+          </ng-container>
+          <ng-template #initialsBlock>
+            <div
+              class="w-11 h-11 mx-3 rounded-xl bg-primary hover:bg-blue-600 transition-colors text-white font-medium flex items-center justify-center text-[16px]"
+            >
+              {{ getUserInitials() }}
+            </div>
+          </ng-template>
+        </button>
+
+        <!-- Profile Dropdown Menu -->
+        <div
+          *ngIf="isProfileMenuOpen"
+          class="absolute right-0 mt-52 w-48 bg-white rounded-md shadow-lg z-20"
+        >
+          <div class="px-4 py-2 text-sm text-gray-800">
+            <p>{{ userName }}</p>
+            <p class="text-xs text-gray-500">{{ userEmail }}</p>
+          </div>
+          <hr class="my-1" />
+          <a
+            (click)="navigateToProfile()"
+            class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer border-b"
+            >Profile</a
+          >
+          <a
+            (click)="logout()"
+            class="block px-4 py-3 text-sm text-red-600 hover:bg-gray-100 cursor-pointer"
+            >Keluar</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div
+    class="md:hidden"
+    [ngClass]="{'block': isNavbarOpen, 'hidden': !isNavbarOpen}"
+  >
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a
+        routerLink="/solutions"
+        routerLinkActive="text-white bg-primary"
+        class="text-gray-700 hover:text-white hover:bg-primary block px-3 py-2 rounded-md text-base font-medium"
+        >Home</a
+      >
+      <a
+        routerLink="/resources"
+        routerLinkActive="text-primary bg-primary"
+        class="text-gray-700 hover:text-white hover:bg-primary block px-3 py-2 rounded-md text-base font-medium"
+        >Paket</a
+      >
+      <a
+        routerLink="/products"
+        routerLinkActive="text-primary bg-primary"
+        class="text-gray-700 hover:text-white hover:bg-primary block px-3 py-2 rounded-md text-base font-medium"
+        >Testimoni</a
+      >
+      <a
+        routerLink="/company"
+        routerLinkActive="text-primary bg-primary"
+        class="text-gray-700 hover:text-white hover:bg-primary block px-3 py-2 rounded-md text-base font-medium"
+        >Blog</a
+      >
+      <a
+        routerLink="/contact"
+        class="bg-primary text-white hover:bg-primtext-primary block px-3 py-2 rounded-md text-base font-medium"
+        >Contact</a
+      >
+    </div>
+  </div>
+</nav>

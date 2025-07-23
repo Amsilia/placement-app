@@ -1,0 +1,188 @@
+<div class="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-md">
+  <div class="flex justify-between items-start mb-4">
+    <div>
+      <h2 class="text-2xl font-sora font-bold text-gray-800">
+        Welcome, {{ fullname }}!
+      </h2>
+      <p class="text-gray-500 text-sm">
+        Informasi tentang profil dan preferensi Anda di semua layanan kami.
+      </p>
+    </div>
+    <div class="flex space-x-2">
+      <button
+        *ngIf="!isEditable"
+        (click)="enableEdit()"
+        class="bg-blue-500 text-white rounded-xl px-5 py-3 font-medium"
+      >
+        Edit
+      </button>
+      <button
+        *ngIf="isEditable"
+        (click)="cancelEdit()"
+        class="bg-gray-300 text-gray-700 hover:bg-gray-400 hover:text-white rounded-xl px-5 py-3 font-medium"
+      >
+        Batal
+      </button>
+      <button
+        *ngIf="isEditable"
+        (click)="saveChanges()"
+        class="bg-primary hover:bg-blue-500 text-white rounded-xl px-5 py-3 font-medium"
+      >
+        Simpan
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div
+    *ngIf="showToast"
+    class="flex items-center bg-[#E2F2FF] border border-blue-300 text-blue-800 rounded-lg p-4 mb-4 relative"
+  >
+    <img
+      src="assets/image/icons/alarm.svg"
+      alt="notification icon"
+      class="w-7 h-7 mr-3"
+    />
+    <p class="text-sm font-medium">
+      Silahkan lengkapi data diri anda terlebih dahulu.
+    </p>
+    <button
+      (click)="dismissToast()"
+      class="absolute bg-slate-100 p-1 rounded-full w-8 top-3 right-4 text-blue-800 hover:text-blue-600 focus:outline-none"
+    >
+      &times;
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6">
+    <div>
+      <label class="block font-medium text-gray-600 mb-5"
+        >Foto Profil <span class="text-red-500">*</span></label
+      >
+      <div class="flex items-center space-x-4">
+        <div
+          class="rounded-xl w-24 h-24 flex items-center justify-center bg-blue-500 text-white overflow-hidden"
+        >
+          <img
+            *ngIf="avatar"
+            [src]="avatar"
+            alt="Profile Preview"
+            class="w-full h-full object-cover"
+          />
+          <span *ngIf="!avatar">PS</span>
+        </div>
+
+        <input
+          type="file"
+          class="hidden"
+          id="profile-upload"
+          (change)="onProfileImageChange($event)"
+          [disabled]="!isEditable"
+        />
+        <label
+          for="profile-upload"
+          [class.cursor-pointer]="isEditable"
+          [class.opacity-50]="!isEditable"
+          class="bg-[#E2F2FF] border border-primary text-primary rounded-lg px-4 py-2"
+          >Unggah</label
+        >
+        <button
+          (click)="removeProfileImage()"
+          [disabled]="!isEditable"
+          class="text-red-600 hover:text-red-800"
+        >
+          Hapus
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <label class="block font-medium text-gray-600 mb-1"
+        >Nama Lengkap <span class="text-red-500">*</span></label
+      >
+      <input
+        type="text"
+        [(ngModel)]="fullname"
+        class="border border-gray-300 rounded-lg p-2 py-4 w-full"
+        [disabled]="!isEditable"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block font-medium text-gray-600 mb-1"
+          >Email <span class="text-red-500">*</span></label
+        >
+        <input
+          type="email"
+          value="{{ userEmail }}"
+          class="border border-gray-300 rounded-lg py-4 p-2 w-full"
+          [disabled]="true"
+        />
+      </div>
+      <div>
+        <label class="block font-medium text-gray-600 mb-1"
+          >No. Handphone <span class="text-red-500">*</span></label
+        >
+        <input
+          type="text"
+          [(ngModel)]="no_handphone"
+          class="border border-gray-300 rounded-lg p-2 w-full py-4"
+          [disabled]="!isEditable"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="relative">
+        <label class="block font-medium text-gray-600 mb-1"
+          >Tanggal Lahir <span class="text-red-500">*</span></label
+        >
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+           
+            [(ngModel)]="birth_date"
+            name="birth_date"
+            type="date"
+            class="border border-gray-300 rounded-lg p-2"
+            [disabled]="!isEditable"
+          />
+          <!-- [matDatepicker]="picker" -->
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <label class="block font-medium text-gray-600 mb-1"
+          >Jenis Kelamin <span class="text-red-500">*</span></label
+        >
+        <select
+          class="border border-gray-300 rounded-lg p-2 py-4 w-full"
+          [disabled]="!isEditable"
+          [(ngModel)]="gender"
+        >
+          <option value="" disabled>Pilih Jenis Kelamin</option>
+          <option value="L">Laki-laki</option>
+          <option value="P">Perempuan</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="flex items-center">
+      <input
+        type="checkbox"
+        id="update-info"
+        class="mr-2"
+        [disabled]="!isEditable"
+      />
+      <label for="update-info" class="text-secondary text-sm cursor-pointer"
+        >Saya bersedia menerima update informasi dari PIS Japan Career.</label
+      >
+    </div>
+  </div>
+</div>

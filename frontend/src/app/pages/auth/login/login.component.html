@@ -1,0 +1,167 @@
+<div class="min-h-screen flex flex-col justify-between">
+  <div class="flex rounded-lg w-full max-w-8xl mx-auto my-auto">
+    <!-- Left Side - Full Image -->
+    <div class="hidden md:flex w-1/2 rounded-l-lg">
+      <img
+        src="assets/image/auth/leftheader.png"
+        alt="Karir Jepang"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <!-- Right Side - Login Form -->
+    <div class="w-full md:w-1/2 p-8 flex items-center justify-center">
+      <div class="w-full max-w-md">
+        <h2 class="text-[30px] font-bold mb-2 text-center font-sora">
+          Selamat Datang
+        </h2>
+        <p class="text-secondary text-[16px] font-inter mb-6 text-center">
+          Silakan login untuk melanjutkan dan mengakses layanan serta fitur
+          lengkap yang kami sediakan.
+        </p>
+        <!-- Form with border -->
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="onSubmit()"
+          class="border border-badge rounded-xl p-11 shadow-sm"
+        >
+          <div class="mb-4">
+            <label for="email" class="block text-[16px] font-medium text-brith"
+              >Username / Email <span class="text-red-500">*</span></label
+            >
+            <input
+              formControlName="email"
+              id="email"
+              type="email"
+              class="mt-1 block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              placeholder="Masukkan Username / Email Anda"
+            />
+            <div
+              *ngIf="
+                loginForm.controls['email'].invalid &&
+                loginForm.controls['email'].touched
+              "
+              class="text-sm text-red-600 mt-1"
+            >
+              Email tidak valid.
+            </div>
+          </div>
+
+          <div class="mb-4 relative">
+            <label
+              for="password"
+              class="block text-[16px] font-medium text-brith"
+            >
+              Kata Sandi <span class="text-red-500">*</span>
+            </label>
+            <input
+              formControlName="password"
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              class="mt-1 block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              placeholder="*********"
+            />
+            <!-- Custom Icon for Show/Hide Password -->
+            <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-4 top-10 focus:outline-none"
+            >
+              <!-- Display different icons based on showPassword value -->
+              <img
+                *ngIf="showPassword"
+                src="assets/image/icons/visible.png"
+                alt="Hide Password"
+                class="h-5 w-5"
+              />
+              <img
+                *ngIf="!showPassword"
+                src="assets/image/icons/hide.png"
+                alt="Show Password"
+                class="h-5 w-5"
+              />
+            </button>
+
+            <!-- Validation message -->
+            <div
+              *ngIf="
+                loginForm.controls['password'].invalid &&
+                loginForm.controls['password'].touched
+              "
+              class="text-sm text-red-600 mt-1"
+            >
+              Kata sandi diperlukan.
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between mb-4">
+            <label for="rememberMe" class="flex items-center">
+              <input
+                type="checkbox"
+                formControlName="rememberMe"
+                id="rememberMe"
+                class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded cursor-pointer"
+              />
+              <span class="ml-2 block text-[16px] text-brith cursor-pointer"
+                >Ingat Saya</span
+              >
+            </label>
+            <a
+              href="#"
+              class="text-[16px] font-medium text-brandcolor hover:underline"
+              >Lupa kata sandi?</a
+            >
+          </div>
+
+          <button
+            type="submit"
+            [disabled]="loginForm.invalid || isSubmitting"
+            class="w-full py-3 px-9 bg-primary hover:bg-primary/35 text-white rounded-lg hover:bg-primary-dark focus:ring-4 focus:ring-primary focus:outline-none disabled:bg-gray-300 my-3 transition-colors"
+          >
+            <span *ngIf="!isSubmitting">MASUK</span>
+            <span *ngIf="isSubmitting" class="flex items-center space-x-2">
+              <svg
+                class="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                ></path>
+              </svg>
+              <span>Processing...</span>
+            </span>
+          </button>
+
+          <p class="text-center text-[16px] text-secondary mt-4">
+            Belum punya akun?
+            <a
+              href="/register"
+              class="text-brandcolor underline text-[16px] font-medium"
+              >Daftar disini</a
+            >
+          </p>
+        </form>
+        <footer class="text-center text-[#959EA9] text-[16px] font-inter mt-52">
+          © 2024 PIS Japan Career. All Rights Reserved.
+          <br />
+          <a href="#" class="hover:underline">Privacy Policy</a> |
+          <a href="#" class="hover:underline">Terms of Use</a>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer - PIS Japan Career All Rights Reserved -->
+</div>

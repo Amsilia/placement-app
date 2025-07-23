@@ -1,0 +1,8 @@
+<ng-container *ngIf="isUserLoggedIn; else guestNavbar">
+    <app-navbar-users></app-navbar-users>
+</ng-container>
+<ng-template #guestNavbar>
+    <app-navbar></app-navbar>
+</ng-template>
+<app-header [slug]="articleId"></app-header>
+<app-content [slug]="articleId"></app-content>

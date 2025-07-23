@@ -1,0 +1,91 @@
+<div class="p-6 bg-white border rounded-lg">
+  <!-- Package Name -->
+  <div class="flex items-center mb-4">
+    <label for="packageName" class="w-1/3 text-brith text-[16px] font-medium">Paket</label>
+    <div class="w-2/3 flex items-center">
+      <input
+        id="packageName"
+        type="text"
+        [(ngModel)]="newPackage.name"
+        [readonly]="!isEditing"
+        placeholder="Masukan Nama Paket"
+        class="flex-grow py-3 px-2 border rounded-md"
+      />
+      <!-- Tombol Trash -->
+      <button
+        *ngIf="isEditing"
+        class="ml-2 bg-[#BDBDBD] hover:bg-gray-300 p-2 rounded-md"
+        title="Hapus Paket"
+        (click)="onDelete()"
+      >
+        <img src="assets/image/cms/icons/trash.svg" alt="Hapus" class="w-5 h-5" />
+      </button>
+      <!-- Tombol Plus -->
+      <button
+        *ngIf="isEditing"
+        class="ml-2 bg-primary hover:bg-blue-600 p-2 rounded-md"
+        title="Tambah Paket Baru"
+        (click)="addNewPackage()"
+      >
+        <img src="assets/image/cms/icons/addpacket.svg" alt="Tambah" class="w-5 h-5" />
+      </button>
+    </div>
+  </div>
+
+ <!-- Icon Upload -->
+<div class="flex items-center mb-4">
+  <label for="packageIcon" class="w-1/3 text-brith text-[16px] font-medium">Icon</label>
+  <div class="w-2/3 flex items-center">
+    <div
+      class="relative w-14 h-14 border border-gray-300 rounded-lg flex items-center justify-center bg-gray-100"
+      [ngClass]="{ 'cursor-pointer': isEditing, 'cursor-not-allowed': !isEditing }"
+      [style.pointerEvents]="isEditing ? 'auto' : 'none'"
+      (click)="isEditing && iconInput.click()"
+    >
+      <img
+        *ngIf="newPackage.iconPreview; else defaultIcon"
+        [src]="newPackage.iconPreview"
+        alt="Uploaded Icon"
+        class="w-full h-full object-cover rounded-lg"
+      />
+      <ng-template #defaultIcon>
+        <img src="assets/image/cms/icons/image-alt.svg" alt="Default Icon" class="w-8 h-8 " />
+      </ng-template>
+      <input
+        #iconInput
+        id="packageIcon"
+        type="file"
+        accept="image/*"
+        (change)="onIconChange($event)"
+        class="absolute inset-0 opacity-0"
+      />
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- Package Price -->
+  <div class="flex items-center mb-4">
+    <label for="packagePrice" class="w-1/3 text-brith text-[16px] font-medium">Harga Paket</label>
+    <input
+      id="packagePrice"
+      type="number"
+      [(ngModel)]="newPackage.price"
+      [readonly]="!isEditing"
+      placeholder="Masukan Harga"
+      class="w-2/3 py-3 px-2 border rounded-md"
+    />
+  </div>
+
+  <div class="flex items-start mb-4">
+    <label for="packageDescription" class="w-1/3 text-brith text-[16px] font-medium">Keterangan</label>
+    <ckeditor
+      [editor]="Editor"
+      [config]="editorConfig"
+      [(ngModel)]="newPackage.description"
+      (ready)="onEditorReady($event)"
+      class="w-2/3 py-3 px-2 border rounded-md"
+    ></ckeditor>
+  </div>  
+</div>

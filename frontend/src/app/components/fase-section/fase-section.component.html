@@ -1,0 +1,45 @@
+<section class="container mx-auto w-full px-4 md:px-11">
+  <!-- Header section -->
+  <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 md:gap-8">
+    <h2 class="text-2xl md:text-[32px] font-bold font-sora text-[#333333]">
+      Keuntungan apa yang akan kamu 
+      <span class="hidden md:inline"><br></span> 
+      peroleh di sini?
+    </h2>
+    <p class="text-sm md:text-[15px] text-secondary md:max-w-md">
+      Dapatkan akses eksklusif ke berbagai pelatihan dan pengembangan diri yang akan mempersiapkan Anda menjadi profesional unggul dan siap bersaing di pasar global.
+    </p>
+  </div>
+  
+  <!-- Phases accordion -->
+  <div class="border-t border-gray-300 mt-4 md:mt-6">
+    <div *ngFor="let fase of fases; let i = index" class="border-b border-gray-300">
+      <button 
+        (click)="toggleFase(i)" 
+        class="flex justify-between items-center w-full py-4 md:py-5 focus:outline-none"
+      >
+        <span class="font-semibold font-inter text-base md:text-[18px]">{{ fase.title }}</span>
+        
+        <img 
+          [src]="openFaseIndex === i ? 'assets/image/icons/ex.svg' : 'assets/image/icons/minus.svg'"  
+          alt="Toggle Icon" 
+          class="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 ease-in-out"
+          [ngClass]="openFaseIndex === i ? 'rotate-50' : ''"
+        />
+      </button>
+      
+      <div 
+        [@slideToggle]="openFaseIndex === i ? 'expanded' : 'collapsed'" 
+        class="overflow-hidden"
+      >
+        <ng-container *ngIf="fase.subheading">
+          <h3 class="font-semibold text-sm md:text-md text-gray-700 mb-2 pr-4">{{ fase.subheading }}</h3>
+        </ng-container>
+        
+        <ul class="list-disc pl-5 md:pl-7 text-sm md:text-[15px] text-gray-700 space-y-2">
+          <li *ngFor="let item of fase.content" class="pr-4">{{ item }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

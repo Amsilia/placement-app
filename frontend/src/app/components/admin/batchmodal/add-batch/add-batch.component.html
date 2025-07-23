@@ -1,0 +1,147 @@
+<div
+  class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50"
+  *ngIf="isVisible"
+>
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+    <!-- Header -->
+    <div class="flex justify-between items-center pb-3">
+      <h2 class="text-[24px] font-semibold text-brith font-sora">
+        Tambah Batch
+      </h2>
+      <button
+        class="text-secondary border rounded-lg bg-supersoft p-2 w-[30px] h-[35px] hover:text-gray-700"
+        (click)="closeModal()"
+      >
+        <img src="assets/image/icons/ex.svg" alt="icon close" />
+      </button>
+    </div>
+
+    <!-- Form -->
+    <form (submit)="onSubmit($event)" class="mt-4">
+      <!-- Batch Number -->
+      <div class="mb-4">
+        <label
+          for="batch-number"
+          class="block text-sm font-medium text-brith my-2"
+        >
+          Nomor Batch <span class="text-red-500 mx-1">*</span>
+        </label>
+        <input
+          id="batch-number"
+          type="text"
+          [(ngModel)]="batchNumber"
+          name="batchNumber"
+          class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Masukan nomor batch"
+          required
+        />
+      </div>
+
+      <!-- Start Date & End Date -->
+      <div class="mb-4 flex gap-4">
+        <!-- Start Date -->
+        <div class="flex-1">
+          <label
+            for="start-date"
+            class="block text-sm font-medium text-brith my-2"
+          >
+            Tanggal Mulai <span class="text-red-500 mx-1">*</span>
+          </label>
+          <input
+            id="start-date"
+            type="date"
+            [(ngModel)]="startDate"
+            name="startDate"
+            class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <!-- End Date -->
+        <div class="flex-1">
+          <label
+            for="end-date"
+            class="block text-sm font-medium text-brith my-2"
+          >
+            Tanggal Selesai <span class="text-red-500 mx-1">*</span>
+          </label>
+          <input
+            id="end-date"
+            type="date"
+            [(ngModel)]="endDate"
+            name="endDate"
+            class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Open At & Close At -->
+      <div class="mb-4 flex gap-4">
+        <!-- Open At -->
+        <div class="flex-1">
+          <label
+            for="open-at"
+            class="block text-sm font-medium text-brith my-2"
+          >
+            Tanggal Buka <span class="text-red-500 mx-1">*</span>
+          </label>
+          <input
+            id="open-at"
+            type="datetime-local"
+            [(ngModel)]="openAt"
+            name="openAt"
+            class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <!-- Close At -->
+        <div class="flex-1">
+          <label
+            for="close-at"
+            class="block text-sm font-medium text-brith my-2"
+          >
+            Tanggal Tutup <span class="text-red-500 mx-1">*</span>
+          </label>
+          <input
+            id="close-at"
+            type="datetime-local"
+            [(ngModel)]="closeAt"
+            name="closeAt"
+            class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Is Active -->
+      <div class="mb-4">
+        <label class="inline-flex items-center">
+          <input
+            type="checkbox"
+            [(ngModel)]="isActive"
+            name="isActive"
+            class="mr-2"
+          />
+          Aktif
+        </label>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex justify-end gap-4">
+        <button
+          type="button"
+          class="px-6 py-2 mt-4 text-gray-700 border rounded-lg border-[#BDBDBD] hover:bg-gray-300 font-medium"
+          (click)="closeModal()"
+        >
+          Batal
+        </button>
+        <button
+          type="submit"
+          class="px-6 py-3 mt-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-medium"
+        >
+          Simpan
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

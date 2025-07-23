@@ -1,0 +1,47 @@
+<section class="container mx-auto w-full px-4 md:px-11 py-20 my-10">
+  <h2 class="text-2xl md:text-[30px] font-bold font-sora mb-2 md:mb-4">Proses Pendaftaran</h2>
+  <p class="text-secondary text-base md:text-[18px] mb-8 md:mb-12 font-inter">
+      Pendaftaran cepat dan praktis untuk memulai perjalanan Anda bersama kami
+  </p>
+
+  <div class="relative">
+      <!-- Horizontal line for desktop -->
+      <div class="absolute left-0 w-full h-[1px] bg-badge hidden md:block z-0"></div>
+
+      <!-- Vertical line for mobile -->
+      <div class="absolute top-0 left-[25px] w-[1px] h-full bg-badge md:hidden z-0"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-7">
+          <div *ngFor="let step of registrationSteps; let i = index" 
+              class="relative flex md:block h-full">
+              <!-- Mobile layout -->
+              <div class="md:hidden absolute left-0 top-[50%] transform translate-y-[-50%]">
+                  <img [src]="step.stepnumber" 
+                       [alt]="'Step ' + step.step" 
+                       class="w-12 h-12 z-10 bg-white rounded-full"
+                  />
+              </div>
+
+              <!-- Desktop number indicator -->
+              <div class="hidden md:block absolute top-0 left-[50%] transform -translate-x-1/2 -translate-y-1/2">
+                  <img [src]="step.stepnumber" 
+                       [alt]="'Step ' + step.step" 
+                       class="w-10 h-10 z-10 bg-white rounded-full"
+                  />
+              </div>
+
+              <!-- Content card -->
+              <div class="ml-16 md:ml-0 border border-badge p-4 md:p-6 rounded-xl shadow-md md:mt-12 flex-1 h-full flex flex-col">
+                  <div>
+                      <img [src]="step.icon" 
+                           [alt]="step.title" 
+                           class="w-6 h-6 md:w-7 md:h-7 mb-3 md:mb-4"
+                      />
+                      <h3 class="font-bold text-base md:text-[18px] mb-2">{{ step.title }}</h3>
+                  </div>
+                  <p class="text-secondary font-inter text-sm md:text-[14px]">{{ step.description }}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

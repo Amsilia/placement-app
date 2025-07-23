@@ -1,0 +1,15 @@
+# Umum
+node_modules/
+.env
+.DS_Store
+*.log
+*.pem
+
+# Frontend
+frontend/build/
+frontend/dist/
+
+# Backend
+backend/.env
+backend/__pycache__/
+backend/migrations/

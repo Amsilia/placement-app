@@ -1,0 +1,69 @@
+<div class="p-6 bg-white mt-6 border rounded-lg" *ngFor="let pkg of packageData; let i = index">
+    <!-- Package Name -->
+    <div class="flex items-center mb-4">
+      <label for="universityPackageType" class="w-1/3 text-brith text-[16px] font-medium">Paket</label>
+      <div class="w-2/3 flex items-center">
+        <input
+          id="universityPackageType"
+          type="text"
+          [(ngModel)]="pkg.name"
+          [readonly]="!isEditing"
+          placeholder="Normal Price"
+          class="flex-grow py-3 px-2 border rounded-md"
+        />
+        <!-- Icon Hapus -->
+        <button
+          *ngIf="isEditing"
+          class="ml-2 bg-[#BDBDBD] hover:bg-gray-300 p-2 rounded-md"
+          title="Hapus Paket"
+          (click)="deletePackage(i)"
+        >
+          <img src="assets/image/cms/icons/trash.svg" alt="Hapus" class="w-5 h-5" />
+        </button>
+        <!-- Icon Tambah -->
+        <button
+          *ngIf="isEditing"
+          class="ml-2 bg-primary hover:bg-blue-600 p-2 rounded-md"
+          title="Tambah Paket Baru"
+          (click)="addPackage()"
+        >
+          <img src="assets/image/cms/icons/addpacket.svg" alt="Tambah" class="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+  
+    <!-- Icon Display (Tidak Diedit) -->
+    <div class="flex items-center mb-4">
+      <label for="universityIcon" class="w-1/3 text-brith text-[16px] font-medium">Icon</label>
+      <img src="assets/image/icons/price-special.svg" alt="Package Icon" class="w-14 h-14 rounded-lg border p-3" />
+    </div>
+  
+    <!-- Harga Paket -->
+    <div class="flex items-center mb-4">
+      <label for="universityPrice" class="w-1/3 text-brith text-[16px] font-medium">Harga Paket</label>
+      <input
+        id="universityPrice"
+        type="text"
+        [(ngModel)]="pkg.price"
+        [readonly]="!isEditing"
+        class="w-2/3 py-3 px-2 border rounded-md"
+      />
+    </div>
+  
+    <!-- Deskripsi Paket -->
+    <div class="flex items-start mb-4">
+      <label for="universityDescription" class="w-1/3 text-brith text-[16px] font-medium">Keterangan</label>
+      <ckeditor
+        *ngIf="isEditing"
+        [editor]="Editor"
+        [config]="editorConfig"
+        [(ngModel)]="pkg.description"
+        class="w-2/3 p-2 py-3 border rounded-md"
+      ></ckeditor>
+      <div *ngIf="!isEditing" class="w-2/3 p-2 py-3 border rounded-md">
+        <div [innerHTML]="pkg.description"></div>
+      </div>
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,40 @@
+<div [ngClass]="isMinimized ? 'w-[100px]' : 'w-[300px]'" class="h-screen bg-white border border-badge shadow-lg transition-width duration-300 ease-in-out fixed">
+  <div class="flex items-center justify-between h-28 px-4">
+    <img *ngIf="!isMinimized" src="assets/image/logo.png" alt="PIS Japan Career" class="h-[46.93px] w-[139.17px] my-4">
+    <img src="assets/image/cms/icons/Chevronsidebar.svg" alt="Toggle Sidebar" (click)="toggleSidebar()" class="cursor-pointer transform transition-transform duration-300 w-9" [ngClass]="{'rotate-180': isMinimized, 'ml-1': !isMinimized, 'ml-4': isMinimized}">
+  </div>
+  <nav class="my-7">
+    <ul>
+      <li class="mb-4">
+        <a routerLink="/admin/dashboard" routerLinkActive="active-link" class="flex items-center px-10 py-3 w-full text-gray-700 hover:bg-blue-50 hover:rounded-lg transition-all duration-300">
+          <img src="assets/image/cms/icons/home.svg" alt="Dashboard" class="w-6 h-6">
+          <span *ngIf="!isMinimized" class="ml-4 text-[16px] font-inter">Dashboard</span>
+        </a>
+      </li>
+      <li class="mb-4">
+        <a routerLink="/admin/data-package" routerLinkActive="active-link" class="flex items-center px-10 py-3 w-full text-gray-700 hover:bg-blue-50 hover:rounded-lg transition-all duration-300">
+          <img src="assets/image/cms/icons/journal.svg" alt="Data Pendaftar" class="w-6 h-6">
+          <span *ngIf="!isMinimized" class="ml-4 text-[16px] font-inter">Data Pendaftar</span>
+        </a>
+      </li>
+      <li class="border-t border-badge pt-4">
+        <a routerLink="/admin/setting-pages" routerLinkActive="active-link" class="flex items-center px-10 py-3 w-full text-gray-700 hover:bg-blue-50 hover:rounded-lg transition-all duration-300">
+          <img src="assets/image/cms/icons/settings.svg" alt="Pengaturan Halaman" class="w-6 h-6">
+          <span *ngIf="!isMinimized" class="ml-4 text-[16px] font-inter">Pengaturan Halaman</span>
+        </a>
+      </li>
+      <li class="border-badge pt-4">
+        <a routerLink="/admin/setting-article" routerLinkActive="active-link" class="flex items-center px-10 py-3 w-full text-gray-700 hover:bg-blue-50 hover:rounded-lg transition-all duration-300">
+          <img src="assets/image/cms/icons/settings-article.svg" alt="Pengaturan Article" class="w-6 h-6 mx-0.5">
+          <span *ngIf="!isMinimized" class="ml-3 text-[16px] font-inter">Pengaturan Article</span>
+        </a>
+      </li>
+      <li class="border-badge pt-4">
+        <a routerLink="/admin/setting-testimoni" routerLinkActive="active-link" class="flex items-center px-10 py-3 w-full text-gray-700 hover:bg-blue-50 hover:rounded-lg transition-all duration-300">
+          <img src="assets/image/cms/icons/chat.svg" alt="Pengaturan Article" class="w-6 h-6 mx-0.5">
+          <span *ngIf="!isMinimized" class="ml-3 text-[16px] font-inter">Pengaturan Testimoni</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

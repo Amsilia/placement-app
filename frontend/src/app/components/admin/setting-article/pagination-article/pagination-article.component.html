@@ -1,0 +1,54 @@
+<div class="flex justify-between items-center p-4">
+  <!-- Items Per Page -->
+  <div class="flex items-center gap-3">
+    <label for="itemsPerPage" class="text-sm font-medium">Item per Halaman</label>
+    <select
+      id="itemsPerPage"
+      [(ngModel)]="itemsPerPage"
+      (change)="onItemsPerPageChange($event)"
+      class="border-b border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-500"
+    >
+      <option *ngFor="let option of perPageOptions" [value]="option">{{ option }}</option>
+    </select>
+    <span class="text-sm text-gray-600">of {{ totalItems }}</span>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="flex items-center space-x-3">
+    <!-- Prev Button -->
+    <button
+      (click)="prevPage()"
+      [disabled]="currentPage === 1"
+      class="flex items-center px-3 py-2 disabled:cursor-not-allowed "
+    >
+      <img src="assets/image/cms/icons/arrow-left.svg" alt="Prev" class="w-3 h-3 inline-block mr-2" />
+      <span class="text-sm font-medium text-gray-700">Kembali</span>
+    </button>
+
+      <!-- Page Numbers -->
+    <div class="flex items-center space-x-1">
+      <ng-container *ngFor="let page of getPages()">
+        <button
+          *ngIf="page !== '...'"
+          class="px-3 py-1 rounded-lg"
+          [class.bg-blue-500]="currentPage === page"
+          [class.text-white]="currentPage === page"
+          (click)="goToPage(+page)"
+        >
+          {{ page }}
+        </button>
+        <span *ngIf="page === '...'" class="px-3">...</span>
+      </ng-container>
+    </div>
+
+    <!-- Next Button -->
+    <button
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages"
+      class="flex items-center px-3 py-2 disabled:cursor-not-allowed"
+    >
+      <span class="text-sm font-medium text-gray-700">Lanjut</span>
+      <img src="assets/image/cms/icons/arrow-right.svg" alt="Next" class="w-3 h-3 inline-block ml-2" />
+    </button>
+  </div>
+</div>

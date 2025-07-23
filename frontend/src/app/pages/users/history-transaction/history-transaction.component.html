@@ -1,0 +1,35 @@
+<div
+  class="min-h-screen bg-cover bg-no-repeat"
+  style="background-image: url('assets/image/bg-registrant.png')"
+>
+  <app-navbar-users />
+
+  <div class="flex flex-col mx-20">
+    <!-- Breadcrumbs -->
+    <div class="flex items-center text-sm text-gray-600 mt-32">
+      <a routerLink="/home-user" class="text-slate-400 cursor-pointer"
+        >Beranda</a
+      >
+      <span class="mx-1">/</span>
+      <a routerLink="/history-users" class="font-medium cursor-pointer"
+        >Riwayat Transaksi</a
+      >
+    </div>
+
+    <div class="flex">
+      <app-mini-navigation />
+      <div class="flex-1 p-4">
+        <!-- Add History data Component Here -->
+        <app-history-null
+          *ngIf="!isLoading && history.length === 0"
+        ></app-history-null>
+
+        <app-data-history
+          *ngIf="!isLoading && history.length > 0 && !errorMessage"
+          [history]="history"
+        ></app-data-history>
+        <!-- <app-data-history></app-data-history> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<app-add-price
+  #addPriceModal
+  (priceAdded)="onPriceAdded($event)"
+  (modalClosed)="onModalClosed()"
+></app-add-price>
+
+<!-- <app-edit-price
+  #editPriceModal
+  (priceUpdated)="onPriceUpdated($event)"
+  (modalClosed)="onModalClosed()"
+></app-edit-price>
+
+<app-delete-price
+  #deletePriceModal
+  (priceDeleted)="onPriceDeleted($event)"
+  (modalClosed)="onModalClosed()"
+></app-delete-price> -->
+<div class="p-7">
+  <!-- Header -->
+  <div
+    class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6"
+  >
+    <div>
+      <h1
+        class="text-[24px] text-[#1e293b] font-semibold font-sora mb-2 md:mb-0"
+      >
+        Data Harga
+      </h1>
+      <p class="text-[16px] mx-0.5 text-[#64748b] font-inter">
+        Berikut merupakan seluruh data Harga
+      </p>
+    </div>
+    <button
+      (click)="openAddPriceModal(addPriceModal)"
+      class="mt-4 md:mt-0 px-5 py-3 bg-primary mr-2 text-white rounded-xl hover:bg-[#1d4ed8] transition-colors font-inter"
+    >
+      Tambah Harga
+    </button>
+  </div>
+
+  <!-- Card List -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      *ngFor="let price of prices; let i = index"
+      class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer border border-cyan-500 transition ease-in-out delay-150 relative hover:-translate-y-1 hover:scale-105 duration-300"
+    >
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <h2 class="text-[24px] font-semibold text-brith font-sora">
+            {{ price.name }}
+          </h2>
+          <p class="p-2 text-[#122c50]">{{ price.amount }}</p>
+          <p class="p-1 text-red-500" *ngIf="price?.special_condition">
+            * {{ price.special_condition }}
+          </p>
+        </div>
+        <div class="relative">
+          <button
+            class="p-1 text-[#94a3b8] hover:text-[#475569] rounded-full"
+            (click)="toggleDropdown(i, $event); $event.stopPropagation()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="1.5"></circle>
+              <circle cx="18" cy="12" r="1.5"></circle>
+              <circle cx="6" cy="12" r="1.5"></circle>
+            </svg>
+          </button>
+
+          <!-- Dropdown Modal -->
+          <div
+            *ngIf="dropdownIndex === i"
+            class="absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded-lg shadow-lg z-10"
+          >
+            <!-- <button
+              class="w-full text-left px-4 py-3 text-secondary border-b hover:bg-gray-100"
+              (click)="
+                openEditBatchModal(editBatchModal, price);
+                $event.stopPropagation()
+              "
+            >
+              Edit -->
+            <!-- </button> -->
+            <!-- <button
+              class="w-full text-left px-4 py-3 text-red-600 hover:bg-red-100"
+              (click)="
+                openDeleteBatchModal(deleteBatchModal, price);
+                $event.stopPropagation()
+              "
+            >
+              Hapus
+            </button> -->
+          </div>
+        </div>
+      </div>
+      <!-- <div class="flex space-x-3 mt-3"></div> -->
+    </div>
+  </div>
+</div>

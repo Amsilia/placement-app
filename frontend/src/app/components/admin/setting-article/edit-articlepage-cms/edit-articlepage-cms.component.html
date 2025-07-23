@@ -1,0 +1,176 @@
+<div class="bg-white my-11 p-8 shadow-md rounded-lg max-w-6xl mx-auto">
+  <h2 class="text-[18px] font-medium text-secondary mb-6">Content</h2>
+
+  <div *ngIf="isLoading && !errorMessage" class="text-center p-5 text-blue-500">
+    <p>Memuat detail artikel...</p>
+    </div>
+
+  <div *ngIf="errorMessage" class="text-center p-5 text-red-500">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="successMessage" class="text-center p-5 text-green-500">
+    <p>{{ successMessage }}</p>
+  </div>
+
+  <form *ngIf="!isLoading && !errorMessage" (ngSubmit)="onSubmit()">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-start space-x-4">
+        <div
+          class="w-[560px] h-[200px] bg-gray-100 border border-gray-300 rounded-md overflow-hidden flex items-center justify-center"
+        >
+          <img
+            *ngIf="imagePreview"
+            [src]="imagePreview"
+            alt="Image Preview"
+            class="object-cover w-full h-full"
+          />
+          <span *ngIf="!imagePreview" class="text-gray-400">Preview</span>
+        </div>
+
+        <div class="flex flex-col justify-center space-y-2">
+          <button
+            type="button"
+            class="bg-blue-50 text-primary border border-blue-400 rounded-lg px-3 py-2"
+            (click)="fileInput.click()"
+          >
+            Unggah
+          </button>
+          <button
+            *ngIf="imagePreview"
+            type="button"
+            class="text-red-500 hover:text-red-700 border border-red-500 rounded-lg px-3 py-2"
+            (click)="removeImage()"
+          >
+            Hapus
+          </button>
+          <input
+            #fileInput
+            type="file"
+            accept="image/*"
+            class="hidden"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center space-y-2">
+        <label class="text-secondary text-sm font-medium">Status</label>
+        <label class="flex items-center cursor-pointer">
+          <input type="checkbox" [(ngModel)]="status" name="status" class="sr-only peer" />
+          <div
+            class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+          ></div>
+          <span
+            class="ml-3 text-sm font-medium"
+            [class.text-blue-600]="status"
+            [class.text-gray-700]="!status"
+          >
+            {{ status ? 'Publik' : 'Privat' }}
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-medium mb-2" for="judulArtikel">
+        Judul Artikel <span class="text-red-500">*</span>
+      </label>
+      <input
+        id="judulArtikel"
+        name="judulArtikel"
+        type="text"
+        [(ngModel)]="judulArtikel"
+        required
+        class="w-full p-3 border border-gray-300 rounded-md"
+        placeholder="Masukkan Judul Artikel"
+      />
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-medium mb-2" for="deskripsi">
+        Deskripsi <span class="text-red-500">*</span>
+      </label>
+      <ckeditor
+        [(ngModel)]="deskripsi"
+        name="deskripsi"
+        [editor]="Editor"
+        [config]="editorConfig"
+        class=""
+      ></ckeditor>
+    </div>
+
+    <div class="mt-6">
+      <h3 class="text-[16px] font-medium text-secondary mb-4">Socmed Share</h3>
+      <div class="grid grid-cols-4 gap-4">
+        <div>
+          <label class=" text-gray-700 text-sm font-medium mb-2 flex items-center gap-2">
+            <img src="assets/image/cms/icons/instagram.svg" alt="" class="w-5 h-5" />
+            Instagram <span class="text-[#959EA9] text-sm">(Opsional)</span>
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="socialMedia.instagram"
+            name="instagram"
+            class="w-full p-3 border border-gray-300 rounded-md"
+            placeholder="Link Instagram"
+          />
+        </div>
+        <div>
+          <label class=" text-gray-700 text-sm font-medium mb-2 flex items-center gap-2">
+            <img src="assets/image/cms/icons/whatsapp.svg" alt="" class="w-5 h-5" />
+            Whatsapp <span class="text-[#959EA9] text-sm">(Opsional)</span>
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="socialMedia.whatsapp"
+            name="whatsapp"
+            class="w-full p-3 border border-gray-300 rounded-md"
+            placeholder="Link Whatsapp"
+          />
+        </div>
+        <div>
+          <label class=" text-gray-700 text-sm font-medium mb-2 flex items-center gap-2">
+            <img src="assets/image/cms/icons/Facebook.svg" alt="" class="w-5 h-5" />
+            Facebook <span class="text-[#959EA9] text-sm">(Opsional)</span>
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="socialMedia.facebook"
+            name="facebook"
+            class="w-full p-3 border border-gray-300 rounded-md"
+            placeholder="Link Facebook"
+          />
+        </div>
+        <div>
+          <label class=" text-gray-700 text-sm font-medium mb-2 flex items-center gap-2">
+            <img src="assets/image/cms/icons/twitter.svg" alt="" class="w-5 h-5" />
+            Twitter <span class="text-[#959EA9] text-sm">(Opsional)</span>
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="socialMedia.twitter"
+            name="twitter"
+            class="w-full p-3 border border-gray-300 rounded-md"
+            placeholder="Link Twitter"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-end mt-11 space-x-4">
+      <button
+        type="button"
+        class="text-secondary border border-gray-300 rounded-lg px-6 py-2 hover:bg-gray-100 transition-colors"
+        (click)="cancel()"
+      >
+        Batal
+      </button>
+      <button
+        type="submit" [disabled]="isLoading" class="bg-primary text-white rounded-lg px-6 py-3 hover:bg-blue-700 transition-colors"
+      >
+        {{ isLoading ? 'Menyimpan...' : 'Simpan Perubahan' }}
+      </button>
+    </div>
+  </form>
+</div>

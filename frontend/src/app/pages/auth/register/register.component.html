@@ -1,0 +1,276 @@
+<div class="min-h-screen flex flex-col justify-between">
+  <div class="flex rounded-lg w-full max-w-8xl mx-auto my-auto">
+    <div class="hidden md:flex w-1/2 h-full rounded-l-lg overflow-hidden">
+      <img
+        src="assets/image/auth/leftheader.png"
+        alt="Karir Jepang"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <div class="w-full md:w-1/2 p-8 mt-6 flex items-center justify-center">
+      <div class="w-full max-w-md">
+        <h2 class="text-[30px] font-bold mb-2 font-sora">Daftar Sekarang!</h2>
+        <p class="text-secondary text-[16px] font-inter mb-6">
+          Silakan masukkan data diri Anda dengan benar untuk memulai pendaftaran
+          akun baru.
+        </p>
+        <!-- Wrapper Form -->
+        <form
+          [formGroup]="registerForm"
+          (ngSubmit)="onSubmit()"
+          class="border border-badge rounded-lg p-6 shadow-sm bg-white"
+        >
+          <!-- Username -->
+          <div class="mb-4">
+            <label
+              for="username"
+              class="block text-[16px] font-medium text-brith"
+            >
+              Username <span class="text-red-500">*</span>
+            </label>
+            <input
+              formControlName="username"
+              id="username"
+              type="text"
+              class="mt-1 block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              [class.border-red-500]="
+                registerForm.controls['username'].invalid &&
+                registerForm.controls['username'].touched
+              "
+              [class.border-green-500]="
+                registerForm.controls['username'].valid &&
+                registerForm.controls['username'].touched
+              "
+              placeholder="Masukkan Username Anda"
+            />
+            <div
+              *ngIf="
+                registerForm.controls['username'].invalid &&
+                registerForm.controls['username'].touched
+              "
+              class="text-sm text-red-600 mt-1"
+            >
+              Username diperlukan.
+            </div>
+          </div>
+
+          <!-- Nama Lengkap -->
+          <div class="mb-4">
+            <label
+              for="fullname"
+              class="block text-[16px] font-medium text-brith"
+            >
+              Nama Lengkap <span class="text-red-500">*</span>
+            </label>
+            <input
+              formControlName="fullname"
+              id="fullname"
+              type="text"
+              class="mt-1 block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              [class.border-red-500]="
+                registerForm.controls['fullname'].invalid &&
+                registerForm.controls['fullname'].touched
+              "
+              [class.border-green-500]="
+                registerForm.controls['fullname'].valid &&
+                registerForm.controls['fullname'].touched
+              "
+              placeholder="Masukkan Nama Lengkap Anda"
+            />
+            <div
+              *ngIf="
+                registerForm.controls['fullname'].invalid &&
+                registerForm.controls['fullname'].touched
+              "
+              class="text-sm text-red-600 mt-1"
+            >
+              Nama Lengkap diperlukan.
+            </div>
+          </div>
+          <!-- Email -->
+          <div class="mb-4">
+            <label for="email" class="block text-[16px] font-medium text-brith">
+              Email <span class="text-red-500">*</span>
+            </label>
+            <input
+              formControlName="email"
+              id="email"
+              type="email"
+              class="mt-1 block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              [class.border-red-500]="
+                registerForm.controls['email'].invalid &&
+                registerForm.controls['email'].touched
+              "
+              [class.border-green-500]="
+                registerForm.controls['email'].valid &&
+                registerForm.controls['email'].touched
+              "
+              placeholder="Masukkan Email Anda"
+            />
+            <div
+              *ngIf="
+                registerForm.controls['email'].invalid &&
+                registerForm.controls['email'].touched
+              "
+              class="text-sm text-red-600 mt-1"
+            >
+              Email tidak valid.
+            </div>
+          </div>
+          <!-- No. Hp -->
+          <div class="mb-4">
+            <label for="phone" class="block text-[16px] font-medium text-brith">
+              No. Hp <span class="text-red-500">*</span>
+            </label>
+            <input
+              formControlName="phone"
+              id="phone"
+              type="text"
+              class="mt-1 block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              [class.border-red-500]="
+                registerForm.controls['phone'].invalid &&
+                registerForm.controls['phone'].touched
+              "
+              [class.border-green-500]="
+                registerForm.controls['phone'].valid &&
+                registerForm.controls['phone'].touched
+              "
+              placeholder="Masukkan No. Hp Anda"
+            />
+            <div
+              *ngIf="
+                registerForm.controls['phone'].invalid &&
+                registerForm.controls['phone'].touched
+              "
+              class="text-sm text-red-600 mt-1"
+            >
+              Nomor Hp diperlukan dan harus berupa angka.
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-4 relative">
+            <!-- Menambahkan relative di sini -->
+            <label
+              for="password"
+              class="block text-[16px] font-medium text-brith"
+            >
+              Kata Sandi <span class="text-red-500">*</span>
+            </label>
+            <input
+              formControlName="password"
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              class="mt-1 block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              placeholder="Masukkan password Anda"
+            />
+            <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-4 top-10 focus:outline-none"
+            >
+              <img
+                *ngIf="showPassword"
+                src="assets/image/icons/visible.png"
+                alt="Hide Password"
+                class="h-5 w-5"
+              />
+              <img
+                *ngIf="!showPassword"
+                src="assets/image/icons/hide.png"
+                alt="Show Password"
+                class="h-5 w-5"
+              />
+            </button>
+            <div
+              *ngIf="
+                registerForm.controls['password'].hasError('passwordInvalid') &&
+                registerForm.controls['password'].touched
+              "
+              class="text-sm text-red-600 mt-1"
+            >
+              Password harus minimal 8 karakter, mengandung huruf besar, kecil,
+              dan angka.
+            </div>
+          </div>
+
+          <!-- Jenis Kelamin -->
+          <div class="mb-4">
+            <label class="block text-[16px] font-medium text-brith">
+              Jenis Kelamin <span class="text-red-500">*</span>
+            </label>
+            <div class="flex items-center space-x-4 mt-2">
+              <label class="inline-flex items-center">
+                <input
+                  type="radio"
+                  formControlName="gender"
+                  value="L"
+                  class="form-radio text-primary"
+                />
+                <span class="ml-2 cursor-pointer">Laki - Laki</span>
+              </label>
+              <label class="inline-flex items-center">
+                <input
+                  type="radio"
+                  formControlName="gender"
+                  value="P"
+                  class="form-radio text-primary"
+                />
+                <span class="ml-2 cursor-pointer">Perempuan</span>
+              </label>
+            </div>
+            <div
+              *ngIf="
+                registerForm.controls['gender'].invalid &&
+                registerForm.controls['gender'].touched
+              "
+              class="text-sm text-red-600 mt-1"
+            >
+              Jenis kelamin diperlukan.
+            </div>
+          </div>
+
+          <!-- Tombol Submit -->
+          <button
+            type="submit"
+            [disabled]="registerForm.invalid || isSubmitting"
+            class="w-full py-3 my-6 px-4 bg-brandcolor text-white rounded-lg hover:bg-primary-dark focus:ring-4 focus:ring-primary transition-colors cursor-pointer disabled:bg-gray-300 flex items-center justify-center"
+          >
+            <span *ngIf="!isSubmitting">DAFTAR</span>
+            <span *ngIf="isSubmitting" class="flex items-center space-x-2">
+              <svg
+                class="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                ></path>
+              </svg>
+              <span>Processing...</span>
+            </span>
+          </button>
+        </form>
+
+        <footer class="text-center text-[#959EA9] text-[16px] font-inter mt-9">
+          © 2024 PIS Japan Career. All Rights Reserved.
+          <br />
+          <a href="#" class="hover:underline">Privacy Policy</a> |
+          <a href="#" class="hover:underline">Terms of Use</a>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>

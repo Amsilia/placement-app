@@ -1,0 +1,67 @@
+<footer class="bg-white text-gray-700 container mx-auto w-full px-4 md:px-11">
+  <div class="container mx-auto">
+    <!-- Main Footer Content: Flex Layout for Desktop -->
+    <div class="flex flex-wrap md:flex-nowrap justify-between items-start gap-8 md:gap-12 lg:gap-56">
+      <!-- Logo and Description Section -->
+      <div class="w-full lg:w-[500px] flex flex-col justify-center lg:text-left">
+        <div>
+          <img src="assets/image/logofooter.png" alt="PIS Japan Career Logo" class="max-md:mx-auto h-12 my-5">
+          <p class="text-[16px] text-center md:text-justify font-normal text-secondary">
+            <span class="font-inter"><b>{{ sites?.footer_desc.split(' ').slice(0, 3).join(' ') }}</b> {{ sites?.footer_desc.split(' ').slice(3).join(' ') }}</span>
+          </p>
+        </div>
+
+        <!-- Navigation Menu for Desktop and Mobile -->
+        <nav class="mb-6 mt-6 md:mt-12">
+          <ul class="flex flex-wrap gap-4 max-md:justify-center md:justify-between">
+            <li><a (click)="scrollToSection('home')" class="text-secondary font-inter font-medium hover:text-primary text-sm md:text-base cursor-pointer">Home</a></li>
+            <li><a (click)="scrollToSection('tantangan')" class="text-secondary font-inter font-medium hover:text-primary text-sm md:text-base cursor-pointer">Tantangan</a></li>
+            <li><a (click)="scrollToSection('pricing')" class="text-secondary font-inter font-medium hover:text-primary text-sm md:text-base cursor-pointer">Paket</a></li>
+            <li><a (click)="scrollToSection('testimonial')" class="text-secondary font-inter font-medium hover:text-primary text-sm md:text-base cursor-pointer">Testimonial</a></li>
+            <li><a routerLink="/artikel" class="text-secondary font-inter font-medium hover:text-primary text-sm md:text-base cursor-pointer">Artikel</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Social Icons and Contact Information Section -->
+      <div class="w-full lg:w-[500px] flex flex-col max-md:items-center lg:items-start lg:px-0 my-2 text-center lg:text-start">
+        <div class="flex mt-6 gap-4 lg:justify-end mb-4  lg:mb-0 max-md:order-1 lg:order-none">
+          <a href="#" class="hover:opacity-80 transition-opacity">
+            <img src="assets/image/icons/Instagram.svg" alt="Instagram" class="w-8 h-8 ">
+          </a>
+          <a href="#" class="hover:opacity-80 transition-opacity">
+            <img src="assets/image/icons/Facebook.svg" alt="Facebook" class="w-8 h-8">
+          </a>
+          <a href="#" class="hover:opacity-80 transition-opacity">
+            <img src="assets/image/icons/twitter.svg" alt="Twitter" class="w-8 h-8">
+          </a>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="flex flex-col text-justify gap-3 md:pt-6">
+          <p class="text-sm flex items-center justify-start font-inter">
+            <img src="assets/image/icons/company.svg" alt="Location" class="pr-2">
+              {{ sites?.address }}
+          </p>
+
+          <p class="text-sm flex items-center font-inter">
+            <img src="assets/image/icons/email.svg" alt="Email" class="mr-2">
+            contact&#64;profileimage.studio
+          </p>
+          <p class="text-sm flex items-center font-inter">
+            <img src="assets/image/icons/phone.svg" alt="Phone" class="mr-2">
+            {{ sites?.contact }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-gray-200 my-6"></div>
+
+    <!-- Centered Copyright -->
+    <div class="text-center">
+      <p class="text-sm text-[#959EA9]">&copy; {{ currentYear }} All Rights Reserved - PIS Japan Career</p>
+    </div>
+  </div>
+</footer>

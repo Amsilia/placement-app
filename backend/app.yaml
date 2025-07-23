@@ -1,0 +1,42 @@
+runtime:  nodejs20
+service: default
+# api_version: 1
+
+# env_variables: 
+#   PORT=3333
+#   HOST=0.0.0.0
+#   NODE_ENV=development
+#   APP_KEY=ltoWFqOgfC6B8eVs6Kj2YLxyyXCvwgcu
+#   SESSION_DRIVER=cookie
+#   CACHE_VIEWS=false
+#   DRIVE_DISK=s3
+
+#   DB_CONNECTION=pg
+#   PG_HOST=aws-0-ap-southeast-1.pooler.supabase.com
+#   PG_PORT=6543
+#   PG_USER=postgres.irboqjdyjxxdhulovipx
+#   PG_PASSWORD=Nekoid@123_
+#   PG_DB_NAME=postgres
+
+#   REDIS_CONNECTION=local
+#   REDIS_HOST=redis-13715.c334.asia-southeast2-1.gce.redns.redis-cloud.com
+#   REDIS_PORT=13715
+#   REDIS_PASSWORD=gcG9wZNWEzRy2NZ5cUhpbh4mWEea4xb8
+
+#   JWT_EMAIL_VERIFICATION_SECRET=3dde1ff28c65baa2d7853a78e7a5b7abba69adcf5b3bf7bd895880bf6d393b85
+#   JWT_RESTORE_PASSWORD_SECRET=3dcefef8aead1c4a8303158af5e99989d52e0c79b21511a93789a7dcff4add47
+#   JWT_SECRET=9ebcbeab730691cc97546598733cb1cff346c7ff0698a15ca2d8bd6539701cad
+#   BASE_URL=http://127.0.0.1:3333
+
+#   SMTP_HOST=smtp.gmail.com
+#   SMTP_PORT=465
+#   SMTP_USERNAME=pentol.verify@gmail.com
+#   SMTP_PASSWORD=abjitwutuubpvpoc
+
+#   GOOGLE_CLIENT_ID=clientId
+#   GOOGLE_CLIENT_SECRET=clientSecret
+#   S3_KEY=AKIASA5U5TBBUFJTWB4X
+#   S3_SECRET=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
+#   S3_BUCKET=bucket-testing-pis
+#   S3_REGION=ap-southeast-1
+#   BUCKET_ENDPOINT=https://bucket-testing-pis.s3.ap-southeast-1.amazonaws.com

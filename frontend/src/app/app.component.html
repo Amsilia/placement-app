@@ -1,0 +1,8 @@
+<app-toast
+  *ngIf="toastVisible && toastTitle && toastMessage"
+  [title]="toastTitle"
+  [message]="toastMessage"
+  [type]="toastType"
+>
+</app-toast>
+<router-outlet />

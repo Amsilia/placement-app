@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifikasi Email - PIS Japan Career</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #8ecaff; /* Blue sky */
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #f8fffe;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 1, 15, 0.1);
+      text-align: center;
+    }
+    header {
+      background-color: #009ffc; /* Blue sea */
+      padding: 15px;
+      text-align: center;
+      color: white;
+      border-radius: 10px 10px 0 0;
+    }
+    header img {
+      max-width: 150px;
+    }
+    h1 {
+      color: #0077be;
+      font-size: 24px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .cta {
+      font-family: arial;
+      font-weight: bold;
+      color: #FFFFFF !important;
+      font-size: 15px;
+      text-shadow: 1px 1px 0px #DCDED3;
+      box-shadow: 5px 5px 5px #9FC0F9;
+      padding: 13px 40px;
+      border-radius: 28px;
+      border: 1px groove #0067A3;
+      background: #63B8EE;
+    }
+    .cta:hover {
+      color: #6A6A6A !important;
+      background: #468CCF;
+      background: linear-gradient(to top, #468CCF, #63B8EE);
+    }
+    .mailto{
+      color : white;
+      text-decoration : none;
+    }
+    footer {
+      background-color: #e6f7ff; /* Light blue sky */
+      padding: 15px;
+      color: #333;
+      text-align: center;
+      font-size: 14px;
+      border-radius: 0 0 10px 10px;
+      margin-top: 20px;
+    }
+    footer a {
+      color: #0077be;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="wrapper">
+        <svg>
+          <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+            PIS JAPAN CAREER
+          </text>
+        </svg>
+      </div>
+    </header>
+
+    <h1>Verifikasi Email Anda</h1>
+    <p>Halo {{ fullname }}, Terima kasih telah mendaftar <strong>PIS Japan Career</strong>! Untuk melengkapi proses registrasi, silakan verifikasi email Anda dengan mengklik tombol di bawah ini.</p>
+
+    <button class="cta">
+      <a href="{{ verificationUrl }}" class="mailto">Verifikasi Email Sekarang</a>
+    </button>
+    <p>Jika Anda tidak merasa mendaftar ke layanan ini, silakan abaikan email ini.</p>
+    <p>Jika tautan di atas tidak berfungsi, Anda dapat meng-copy dan paste URL berikut di browser Anda:</p>
+    <p>{{ verificationUrl }}</p>
+    <footer>
+      <p>&copy; 2024 PIS Japan Career </p>
+    </footer>
+  </div>
+</body>
+</html>

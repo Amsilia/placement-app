@@ -1,0 +1,31 @@
+<div class="flex bg-white p-6 my-11 rounded-xl shadow-lg relative">
+  <!-- Sidebar for Package Selection -->
+  <div class="w-1/4 border-r pr-6">
+    <h3 class="text-lg font-semibold mb-4">Pilihan Paket</h3>
+    <app-paket-navigation
+      [isEditing]="isEditing"
+      (packageSelected)="onPackageSelected($event)"
+      (packageAdded)="addNewPackageFromNavigation()"
+    ></app-paket-navigation>
+  </div>
+
+  <!-- Main Form for Package Details -->
+  <div class="w-3/4 pl-3 my-16">
+    <!-- Edit and Save/Cancel Buttons -->
+    <div *ngIf="isEditing" class="absolute top-6 right-6 flex gap-2">
+      <button (click)="cancelEdit()" class="bg-gray-300 text-gray-700 hover:bg-gray-400 hover:text-white rounded-xl px-5 py-3 font-medium">
+        Batal
+      </button>
+      <button (click)="saveChanges()" class="bg-primary hover:bg-blue-500 text-white rounded-xl px-5 py-3 font-medium">
+        Simpan
+      </button>
+    </div>
+    <button *ngIf="!isEditing" (click)="toggleEdit()" class="absolute top-6 right-6 text-primary hover:underline">
+      Edit
+    </button>
+
+    <!-- Render GraduateStudentComponent if selectedPackage is 'graduate' -->
+    <app-graduate-student *ngIf="selectedPackage === 'graduate'" [isEditing]="isEditing"></app-graduate-student>
+    <app-university-student *ngIf="selectedPackage === 'university'" [isEditing]="isEditing"></app-university-student>
+  </div>
+</div>

@@ -1,0 +1,137 @@
+<div class="container mx-auto mt-8 px-2 py-3">
+  <!-- Search and Filter Section -->
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <div class="relative w-[450px] mb-1">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="onSearchInputChange(searchQuery)"
+          placeholder="Cari data disini..."
+          class="border border-gray-300 rounded-lg px-12 py-3 w-full"
+        />
+        <img
+          src="assets/image/icons/Search.svg"
+          alt="Search Icon"
+          class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
+        />
+      </div>
+      <!-- Total Articles below Search -->
+      <div class="text-secondary text-[14px] mt-1">
+        Total ({{ totalArticles }}) Artikel
+      </div>
+    </div>
+
+    <!-- Toggle Icons Section (Right Aligned) -->
+    <div class="flex gap-4">
+      <img
+        src="assets/image/icons/togglegrid.svg"
+        alt="Grid View"
+        class="w-11 h-11 cursor-pointer"
+        (click)="toggleView('grid')"
+        [class.text-blue-500]="isGridView"
+      />
+      <img
+        src="assets/image/icons/togglelist.svg"
+        alt="List View"
+        class="w-11 h-11 cursor-pointer"
+        (click)="toggleView('list')"
+        [class.text-blue-500]="!isGridView"
+      />
+    </div>
+  </div>
+  <!-- Blog Cards Grid or List -->
+  <div
+    [ngClass]="
+      isGridView
+        ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
+        : 'flex flex-col gap-4'
+    "
+  >
+    <div
+      *ngFor="let blog of paginatedArticles"
+      class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300 cursor-pointer bg-supersoft rounded-xl shadow-md p-4"
+      [ngClass]="
+        isGridView ? 'min-h-[15rem]' : 'flex flex-row items-center h-[170px]'
+      "
+      (click)="goToDetail(blog.slug)"
+    >
+      <img
+        [src]="blog.image"
+        alt="Blog Image"
+        class="object-cover rounded-lg mb-4"
+        [ngClass]="isGridView ? 'w-full h-40' : 'w-40 h-32 mr-4 mt-4'"
+      />
+      <div>
+        <div class="text-gray-500 text-sm flex items-center mb-2">
+          <img
+            src="assets/image/icons/calender.svg"
+            alt="Calendar Icon"
+            class="mr-1 w-4 h-4"
+          />{{ blog.updated_at | date : "EEEE, d MMMM yyyy"  }}
+        </div>
+        <h2 class="text-lg font-bold text-gray-800 mb-2">{{ blog.title }}</h2>
+        <div class="text-gray-600 text-sm">
+          <span [innerHTML]="blog.content | slice : 0 : 100"></span>...
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="flex justify-between items-center mt-14 my-11">
+    <!-- Items Per Page Dropdown -->
+    <div class="text-sm text-gray-600">
+      Items per page
+      <select
+        [(ngModel)]="itemsPerPage"
+        (change)="changeItemsPerPage(itemsPerPage)"
+        class="border border-gray-300 rounded-md px-2 py-1 ml-2"
+      >
+        <option *ngFor="let option of [8, 16, 24, 32]" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+      of {{ totalArticles }}
+    </div>
+
+    <!-- Page Navigation -->
+    <div class="flex items-center space-x-2">
+      <!-- Icon for Previous -->
+      <img
+        src="assets/image/blog/icon/chevron-left.svg"
+        alt="Previous"
+        (click)="changePage(currentPage - 1)"
+        [class.opacity-50]="currentPage === 1"
+        [class.cursor-not-allowed]="currentPage === 1"
+        [class.cursor-pointer]="currentPage > 1"
+        class="w-5 h-5"
+      />
+
+      <!-- Dynamic Page Numbers with Dots -->
+      <ng-container *ngFor="let page of getDisplayedPages()">
+        <span *ngIf="page === '...'" class="px-2">...</span>
+        <span
+          *ngIf="page !== '...'"
+          (click)="changePage(+page)"
+          [class.font-bold]="currentPage === page"
+          [class.text-blue-500]="currentPage === page"
+          class="px-2 cursor-pointer"
+          >{{ page }}</span
+        >
+      </ng-container>
+
+      <!-- Icon for Next -->
+      <img
+        src="assets/image/blog/icon/chevron-right.svg"
+        alt="Next"
+        (click)="changePage(currentPage + 1)"
+        [class.opacity-50]="currentPage === totalPages"
+        [class.cursor-not-allowed]="currentPage === totalPages"
+        [class.cursor-pointer]="currentPage < totalPages"
+        class="w-5 h-5"
+      />
+    </div>
+  </div>
+

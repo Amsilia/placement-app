@@ -1,0 +1,102 @@
+<div class="bg-white p-6 my-11 rounded-xl shadow-lg relative">
+  <!-- Header -->
+  <h2 class="text-[24px] font-semibold font-sora text-brith">Profil</h2>
+  <p class="mb-6 text-secondary">
+    Informasi tentang profil dan preferensi Anda.
+  </p>
+
+  <!-- Edit Buttons -->
+  <div *ngIf="isEditing" class="absolute top-6 right-6 flex gap-2">
+    <button
+      (click)="cancelEdit()"
+      class="bg-gray-300 text-gray-700 hover:bg-gray-400 hover:text-white rounded-xl px-5 py-3 font-medium"
+    >
+      Batal
+    </button>
+    <button
+      (click)="saveChanges()"
+      class="bg-primary hover:bg-blue-500 text-white rounded-xl px-5 py-3 font-medium"
+    >
+      Simpan
+    </button>
+  </div>
+  <button
+    *ngIf="!isEditing"
+    (click)="toggleEdit()"
+    class="absolute top-6 right-6 text-primary hover:underline"
+  >
+    Edit
+  </button>
+
+  <!-- Profile Information -->
+  <div class="grid grid-cols-[150px_1fr] gap-y-8 items-start my-14 mx-4">
+    <!-- Profile Picture -->
+    <label class="text-secondary">Foto Profil</label>
+    <div class="flex items-center gap-4">
+      <div
+        class="w-[100px] h-[100px] bg-blue-500 text-white text-2xl font-bold rounded-xl flex items-center justify-center border border-gray-200"
+      >
+        <img
+          *ngIf="profilePicture"
+          [src]="profilePicture"
+          alt="Profile Picture"
+          class="w-full h-full object-cover rounded-xl"
+        />
+        <span *ngIf="!profilePicture">{{ initials }}</span>
+      </div>
+
+      <!-- Upload Buttons -->
+      <div *ngIf="isEditing" class="flex gap-2">
+        <button
+          (click)="uploadProfilePicture()"
+          class="bg-[#E2F2FF] border border-primary text-primary rounded-lg px-4 py-2"
+        >
+          Unggah
+        </button>
+        <button
+          *ngIf="profilePicture"
+          (click)="removeProfilePicture()"
+          class="text-red-600 hover:text-red-800"
+        >
+          Hapus
+        </button>
+      </div>
+    </div>
+
+    <!-- Hidden Input for File Upload -->
+    <input
+      type="file"
+      #fileInput
+      (change)="onFileSelected($event)"
+      class="hidden"
+    />
+
+    <!-- Username -->
+    <label class="text-secondary">Username</label>
+    <input
+      type="text"
+      class=" rounded-xl p-2 w-full"
+      [(ngModel)]="username"
+      [readonly]="true"
+      [disabled]="true"
+    />
+
+    <!-- Full Name -->
+    <label class="text-secondary">Nama Lengkap</label>
+    <input
+      type="text"
+      class="border border-gray-300 rounded-lg p-2 w-full"
+      [(ngModel)]="fullName"
+      [readonly]="!isEditing"
+    />
+
+    <!-- Phone Number -->
+    <label class="text-secondary">No. Handphone</label>
+    <input
+      type="number"
+      class="border border-gray-300 rounded-lg p-2 w-full"
+      [(ngModel)]="phoneNumber"
+      [readonly]="!isEditing"
+    />
+  </div>
+</div>

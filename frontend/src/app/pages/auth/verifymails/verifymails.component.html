@@ -1,0 +1,40 @@
+<div class="min-h-screen flex flex-col justify-between">
+  <div class="flex rounded-lg w-full max-w-8xl mx-auto my-auto">
+    <div class="hidden md:flex w-1/2 h-full rounded-l-lg overflow-hidden">
+      <img
+        src="assets/image/auth/leftheader.png"
+        alt="Karir Jepang"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <div class="w-full md:w-1/2 p-8 mt-6 flex items-center justify-center">
+      <div class="w-full max-w-md">
+        <h2 class="text-[30px] font-bold mb-2 text-center font-sora">
+          {{ title }}
+        </h2>
+        <p class="text-secondary text-[16px] font-inter text-center mb-6">
+          {{ message }}
+        </p>
+
+        <a
+          [href]="feUrl"
+          class="w-full py-3 my-3 px-4 bg-brandcolor text-white rounded-lg hover:bg-brandcolor/50 transition-colors cursor-pointer text-center block"
+        >
+          {{
+            message === "Email berhasil diverifikasi. Silakan login."
+              ? "Klik di sini untuk login"
+              : "Kirim Ulang Email Verifikasi"
+          }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center text-[#959EA9] text-[16px] font-inter mt-40">
+    © 2024 PIS Japan Career. All Rights Reserved.
+    <br />
+    <a href="#" class="hover:underline">Privacy Policy</a> |
+    <a href="#" class="hover:underline">Terms of Use</a>
+  </footer>
+</div>

@@ -1,0 +1,66 @@
+<div
+  class="flex flex-col items-start justify-center min-h-[300px] bg-white rounded-xl shadow-md p-7"
+>
+  <h2 class="text-xl font-bold text-gray-700 font-sora mb-1 text-left">
+    Riwayat Transaksi
+  </h2>
+  <p class="text-gray-500 mb-5 text-left">
+    Informasi tentang data transaksi dan status pembayaran anda
+  </p>
+
+  <div class="w-full">
+    <div
+      *ngFor="let item of history"
+      class="flex justify-between items-center py-4 border p-4 rounded-lg my-4 border-gray-200"
+    >
+      <div class="flex items-center">
+        <img
+          src="assets/image/icons/frametransaction.svg"
+          alt="Transaction Icon"
+          class="w-12 h-12 rounded-lg"
+        />
+        <div class="ml-4">
+          <h3 class="text-[16px] font-semibold text-brith font-inter">
+            {{ item.cost.name }}
+          </h3>
+          <p class="text-sm text-[#959EA9]">
+            {{ item.created_at | date : "EEEE, d MMMM yyyy" : "id-ID" }}
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <span
+          [ngClass]="{
+            'bg-[#198754]': item.status.name === 'Diterima',
+            'bg-[#BB2D3B]': item.status.name === 'Ditolak',
+            'bg-orange-500': item.status.name === 'Menunggu',
+            'bg-black': item.status.name === 'Berlangsung',
+            'bg-gray-500': item.status.name === 'Selesai',
+            'text-white': true,
+            'px-4 py-1 rounded-full text-sm font-medium': true
+          }"
+        >
+          {{ item.status.name }}
+        </span>
+        <img
+          src="assets/image/icons/big-chevronright.svg"
+          alt="Arrow Right"
+          class="w-5 h-5 ml-4 cursor-pointer"
+          (click)="openModal(item.id, item.status.name)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-canceled-modal
+  *ngIf="selectedTransaction && selectedTransaction.status === 'Ditolak'"
+  [transactionId]="selectedTransaction.id"
+  (close)="closeModal()"
+></app-canceled-modal>
+
+<app-successed-modal
+  *ngIf="selectedTransaction && selectedTransaction.status === 'Diterima'"
+  [transactionId]="selectedTransaction.id"
+  (close)="closeModal()"
+></app-successed-modal>

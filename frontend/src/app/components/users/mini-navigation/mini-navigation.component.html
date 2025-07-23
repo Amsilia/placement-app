@@ -1,0 +1,37 @@
+<!-- mini-navigation.component.html -->
+<nav class="bg-white rounded-xl shadow-md p-7 mt-4 w-[250px]">
+    <!-- Navigation Links -->
+    <ul class="space-y-9 cursor-pointer">
+      <li class="flex items-center">
+        <a 
+          routerLink="/profile" 
+          class="flex items-center p-4 mx-2 rounded-lg hover:bg-gray-100"
+          [ngClass]="{'bg-supersoft': isActive('/profile')}"
+        >
+          <img src="assets/image/icons/users.svg" alt="Profile" class="w-6 h-6 mr-2" />
+          <span class="font-medium text-brith text-[14px]">Profil Saya</span>
+        </a>
+      </li>
+      <li class="flex items-center">
+        <a 
+          routerLink="/profile/history-users" 
+          class="flex items-center p-4 mx-2 rounded-lg hover:bg-gray-100"
+          [ngClass]="{'bg-supersoft': isActive('/profile/history-users')}"
+        >
+          <img src="assets/image/icons/transaction.svg" alt="Riwayat Transaksi" class="w-6 h-6 mr-2" />
+          <span class="font-medium text-brith text-[14px]">Riwayat Transaksi</span>
+        </a>
+      </li>
+      <!-- <li class="flex items-center">
+        <a 
+          routerLink="/profile/jadwal-users" 
+          class="flex items-center p-4 mx-2 rounded-lg hover:bg-gray-100"
+          [ngClass]="{'bg-supersoft': isActive('/profile/jadwal-users')}"
+        >
+          <img src="assets/image/icons/schedule.svg" alt="Jadwal Program" class="w-6 h-6 mr-2" />
+          <span class="font-medium text-brith text-[14px]">Jadwal Program</span>
+        </a>
+      </li> -->
+    </ul>
+  </nav>
+  

@@ -1,0 +1,127 @@
+<nav
+  [@fadeSlide]
+  class="mx-auto h-[85px] p-2 fixed z-50 bg-white/90 backdrop-blur-md w-full"
+>
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex-shrink-0 flex items-center">
+        <a routerLink="/" routerLinkActive="active-nav-link" [routerLinkActiveOptions]="{exact: true}" class="flex items-center">
+          <img
+            src="{{ sites?.logo1 }}"
+            alt="Pis Logo"
+            class="h-full w-full ml-2"
+          />
+        </a>
+      </div>
+
+      <div class="hidden md:flex justify-end flex-1 mx-10">
+        <a
+          (click)="navigateToSection('home')"
+          class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer"
+          >Home</a
+        >
+        <a
+          (click)="navigateToSection('tantangan')"
+          class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer"
+          >Tantangan</a
+        >
+        <a
+          (click)="navigateToSection('pricing')"
+          class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer"
+          >Paket</a
+        >
+        <a
+          (click)="navigateToSection('testimonial')"
+          class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer"
+          >Testimonial</a
+        >
+        <a
+          (click)="navigateToSection('blogger')"
+          class="text-secondary hover:text-primary px-4 py-2 rounded-md text-[15px] font-medium cursor-pointer"
+          >Artikel</a
+        >
+      </div>
+      <div class="hidden lg:block mx-3">
+        <a
+          routerLink="/register"
+          routerLinkActive="active-nav-link"
+          class="bg-primary text-white hover:bg-blue-600 hover:text-white transition-colors px-4 py-3 rounded-xl text-sm font-medium"
+          >Register</a
+        >
+      </div>
+      <div class="hidden md:block">
+        <a
+          routerLink="/login"
+          routerLinkActive="active-nav-link"
+          class="bg-transparent border border-primary text-primary hover:bg-blue-600 hover:text-white transition-colors px-4 py-3 rounded-xl text-sm font-medium"
+          >Login</a
+        >
+      </div>
+
+      <div class="md:hidden flex items-center">
+        <button
+          (click)="toggleNavbar()"
+          class="inline-flex items-center justify-center bg-slate-300 w-11 p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#638994]"
+        >
+          <span class="sr-only">Open main menu</span>
+          <fa-icon
+            [icon]="isNavbarOpen ? faTimes : faBars"
+            class="text-xl"
+            [ngStyle]="{ color: isNavbarOpen ? '#638994' : '#5f808a' }"
+          ></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="md:hidden bg-white/90"
+    [@slideInOut]="menuState"
+    [ngClass]="{ block: isNavbarOpen, hidden: !isNavbarOpen }"
+  >
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a
+        (click)="scrollToSection('home')"
+        class="text-gray-700 hover:text-white hover:bg-primary block px-3 py-2 rounded-md text-base font-medium"
+        >Home</a
+      >
+      <a
+        (click)="scrollToSection('pricing')"
+        class="text-gray-700 hover:text-white hover:bg-primary block px-3 py-2 rounded-md text-base font-medium"
+        >Paket</a
+      >
+      <a
+        (click)="scrollToSection('testimonial')"
+        class="text-gray-700 hover:text-white hover:bg-primary block px-3 py-2 rounded-md text-base font-medium"
+        >Testimoni</a
+      >
+      <a
+        routerLink="/artikel"
+        routerLinkActive="active-mobile-link"
+        class="text-gray-700 hover:text-white hover:bg-primary block px-3 py-2 rounded-md text-base font-medium"
+        >Artikel</a
+      >
+      <a
+        routerLink="/contact"
+        routerLinkActive="active-mobile-link"
+        class="text-gray-700 hover:bg-primary block px-3 py-2 rounded-md text-base font-medium"
+        >Contact</a
+      >
+
+      <div class="flex flex-col mt-4">
+        <a
+          routerLink="/login"
+          routerLinkActive="active-mobile-link"
+          class="bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-colors block text-center px-4 py-2 rounded-md font-medium"
+          >Login</a
+        >
+        <a
+          routerLink="/register"
+          routerLinkActive="active-mobile-link"
+          class="bg-primary text-white hover:bg-blue-600 hover:text-white transition-colors block text-center mt-2 px-4 py-2 rounded-md font-medium"
+          >Register</a
+        >
+      </div>
+    </div>
+  </div>
+</nav>

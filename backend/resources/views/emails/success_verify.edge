@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #E0F7FA;
+      color: #2D3748;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      padding: 50px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+    }
+
+    .icon {
+      font-size: 100px;
+      color: #00BFFF;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-size: 32px;
+      color: #007BFF;
+      margin-bottom: 10px;
+    }
+
+    .message {
+      font-size: 18px;
+      color: #4A5568;
+      margin-bottom: 20px;
+    }
+
+    .cta-btn {
+      background-color: #00BFFF;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background-color: #007BFF;
+    }
+    footer {
+        background-color: #e6f7ff; /* Light blue sky */
+        padding: 15px;
+        color: #333;
+        text-align: center;
+        font-size: 14px;
+        border-radius: 0 0 10px 10px;
+        margin-top: 20px;
+      }
+      footer a {
+        color: #0077be;
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    {{-- <div class="icon">✔️</div> --}}
+    <div class="icon">✅</div>
+    <h1 class="title">{{ title }}</h1>
+    <p class="message">{{ message }}</p>
+    <a href="{{ fe_url }}/login" class="cta-btn">Login Sekarang</a>
+    <footer>
+      <p>&copy; 2024 PIS Japan Career </p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<div
+  class="min-h-screen"
+  style="background-image: url('assets/image/bg-registrant.png')"
+>
+  <div class="container mx-auto px-4 py-32">
+    <!-- Breadcrumbs -->
+    <nav class="text-gray-500 text-sm mb-4">
+      <a routerLink="home" class="text-secondary cursor-pointer">Beranda</a>
+      / <span class="text-secondary cursor-pointer">Normal Price</span>
+    </nav>
+
+    <!-- Form Container -->
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-5xl mx-auto">
+      <!-- Title Section -->
+      <div class="text-center mb-8">
+        <h2 class="text-[30px] font-sora text-brith font-bold mb-2">
+          Daftar Sekarang untuk Memulai Perjalanan Anda
+        </h2>
+        <p class="text-secondary text-[17px]">
+          Silahkan mengisi data diri dengan benar, pastikan nomor WhatsApp aktif
+          agar kami bisa menghubungimu lebih lanjut!
+        </p>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="flex items-center justify-center mb-14">
+        <div
+          [class.bg-primary]="currentStep >= 1"
+          class="w-8 h-8 rounded-full text-white cursor-pointer flex items-center justify-center"
+          [ngClass]="{
+            'bg-primary': currentStep >= 1,
+            'bg-gray-300': currentStep < 1
+          }"
+        >
+          1
+        </div>
+        <div
+          class="w-48 h-1 mx-2"
+          [ngClass]="{
+            'bg-primary': currentStep >= 2,
+            'bg-gray-300': currentStep < 2
+          }"
+        ></div>
+        <div
+          class="w-8 h-8 rounded-full cursor-pointer text-white flex items-center justify-center"
+          [ngClass]="{
+            'bg-primary': currentStep >= 2,
+            'bg-gray-300': currentStep < 2
+          }"
+        >
+          2
+        </div>
+        <div
+          class="w-48 h-1 mx-2"
+          [ngClass]="{
+            'bg-primary': currentStep >= 3,
+            'bg-gray-300': currentStep < 3
+          }"
+        ></div>
+        <div
+          class="w-8 h-8 rounded-full cursor-pointer text-white flex items-center justify-center"
+          [ngClass]="{
+            'bg-primary': currentStep >= 3,
+            'bg-gray-300': currentStep < 3
+          }"
+        >
+          3
+        </div>
+      </div>
+
+      <!-- Form with Adjusted Alignment -->
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        *ngIf="currentStep === 1"
+      >
+        <div class="grid grid-cols-[300px_1fr] gap-4">
+          <!-- Adjusted column widths for better alignment -->
+
+          <!-- Left Column: Labels -->
+          <div class="flex flex-col justify-between gap-y-3">
+            <!-- Add space between the labels -->
+            <label class="block text-[16px] font-medium text-gray-700"
+              >Nama Lengkap <span class="text-red-500">*</span></label
+            >
+            <label class="block text-[16px] font-medium text-gray-700"
+              >Email <span class="text-red-500">*</span></label
+            >
+            <label class="block text-[16px] font-medium text-gray-700"
+              >Nomor Handphone (WhatsApp)
+              <span class="text-red-500">*</span></label
+            >
+            <label class="block text-[16px] font-medium text-gray-700"
+              >Status Saat Ini <span class="text-red-500">*</span></label
+            >
+          </div>
+
+          <!-- Right Column: Inputs -->
+          <div class="flex flex-col gap-y-5">
+            <!-- Space between the inputs -->
+            <input
+              formControlName="fullname"
+              type="text"
+              class="block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              placeholder="Nama Lengkap Anda"
+            />
+            <input
+              formControlName="email"
+              type="email"
+              class="block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              placeholder="Email Anda"
+            />
+            <input
+              formControlName="no_handphone"
+              type="text"
+              class="block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              placeholder="Nomor Handphone (WhatsApp) Anda"
+            />
+            <select
+              formControlName="employment_status"
+              class="block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+            >
+              <option value="" disabled selected>
+                Pilih Status Anda Saat Ini
+              </option>
+              <option value="pelajar/mahasiswa">Pelajar/Mahasiswa</option>
+              <option value="bekerja">Pekerja</option>
+              <option value="belum bekerja">Belum Bekerja</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end mt-20 my-3">
+          <button
+            (click)="goToNextStep()"
+            type="submit"
+            class="bg-primary text-white px-8 py-3 font-medium transition duration-300 ease-in-out rounded-xl hover:bg-blue-600 cursor-pointer flex items-center group"
+          >
+            Lanjutkan Daftar
+            <span
+              class="ml-2 transition-transform duration-300 ease-in-out transform group-hover:translate-x-2"
+            >
+              <img
+                src="assets/image/icons/arrow-right.svg"
+                alt="arrow right"
+                class="h-4 w-4"
+              />
+            </span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Step 2 -->
+
+      <form
+        [formGroup]="form"
+        *ngIf="currentStep === 2"
+        enctype="multipart/form-data"
+      >
+        <div class="grid grid-cols-[300px_1fr] gap-6">
+          <div class="flex flex-col justify-between gap-y-3">
+            <label class="block text-[16px] font-medium text-gray-700"
+              >Usia <span class="text-red-500">*</span></label
+            >
+            <label class="block text-[16px] font-medium text-gray-700"
+              >Pendidikan Terakhir <span class="text-red-500">*</span></label
+            >
+            <label class="block text-[16px] font-medium text-gray-700"
+              >Nama Sekolah/Universitas
+              <span class="text-red-500">*</span></label
+            >
+            <label class="block text-[16px] font-medium text-gray-700"
+              >Upload Sertifikat Seminar
+              <span class="text-red-500">*</span></label
+            >
+          </div>
+
+          <!-- Right Column: Inputs -->
+          <div class="flex flex-col gap-y-5">
+            <input
+              formControlName="age"
+              type="number"
+              class="block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              placeholder="Masukkan Usia Anda"
+            />
+            <select
+              formControlName="last_education"
+              class="block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              aria-placeholder="last_education"
+            >
+              <option value="SD">Sekolah Dasar (SD)</option>
+              <option value="SMP">SMP / MTS</option>
+              <option value="SMA">SMA / MA</option>
+              <option value="D3">Diploma 3 (D3)</option>
+              <option value="S1">Diploma 4 (D4) / Sarjana (S1)</option>
+              <option value="S2">Sarjana (S2)</option>
+              <option value="S3">Sarjana (S3)</option>
+            </select>
+            <input
+              formControlName="institution"
+              type="text"
+              class="block w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"
+              placeholder="Masukkan Nama Sekolah/Universitas Anda"
+            />
+
+            <!-- Drag-and-Drop Upload Field -->
+            <div
+              class="border-2 border-dashed border-gray-300 rounded-lg p-5 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50"
+              (click)="onFileUpload($event)"
+              (drop)="onFileDrop($event)"
+              (dragover)="onDragOver($event)"
+              type="file"
+            >
+              <p class="text-gray-500 mb-2">Drag and drop file(s) or</p>
+              <a
+                href="#"
+                (click)="onFileUpload($event); $event.preventDefault()"
+                class="text-blue-500"
+                >browse</a
+              >
+              <input
+                type="file"
+                formControlName="document"
+                class="hidden"
+                (change)="onFileChange($event)"
+              />
+            </div>
+          </div>
+          <div class="mt-2">
+            <div class="flex items-start">
+              <input
+                type="checkbox"
+                formControlName="agreeTerms"
+                id="agreeTerms"
+                class="mr-1 mt-[5px] cursor-pointer"
+              />
+              <label
+                for="agreeTerms"
+                class="text-brith whitespace-nowrap cursor-pointer"
+              >
+                Saya telah membaca, memahami, dan menyetujui seluruh isi
+                persyaratan layanan yang berlaku.
+              </label>
+            </div>
+            <div
+              *ngIf="
+                form.controls['agreeTerms'].touched &&
+                form.controls['agreeTerms'].invalid
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              Anda harus menyetujui persyaratan layanan sebelum melanjutkan.
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between mt-28">
+          <!-- Kembali Button -->
+          <button
+            type="button"
+            class="bg-gray-500 text-white px-8 py-3 font-medium rounded-xl hover:bg-gray-600 transition duration-300 ease-in-out flex items-center group"
+            (click)="goToPreviousStep()"
+          >
+            <span
+              class="mr-2 transition-transform duration-300 ease-in-out transform group-hover:-translate-x-2"
+            >
+              <img
+                src="assets/image/icons/arrow-left.svg"
+                alt="arrow left"
+                class="h-4 w-4"
+              />
+            </span>
+            Kembali
+          </button>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            (click)="onSubmit()"
+            [disabled]="form.invalid || isSubmitting"
+            class="bg-primary text-white px-8 py-3 font-medium rounded-xl hover:bg-blue-600 transition duration-300 ease-in-out flex items-center group"
+          >
+            <span *ngIf="!isSubmitting">DAFTAR</span>
+            <span *ngIf="isSubmitting" class="flex items-center space-x-2">
+              <svg
+                class="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                ></path>
+              </svg>
+              <span>Processing...</span>
+            </span>
+            <span
+              class="ml-2 transition-transform duration-300 ease-in-out transform group-hover:translate-x-2"
+            >
+              <img
+                src="assets/image/icons/arrow-right.svg"
+                alt="arrow right"
+                class="h-4 w-4"
+              />
+            </span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Step 3: Success Message -->
+      <div *ngIf="currentStep === 3" class="text-center">
+        <div class="flex justify-center mb-8">
+          <!-- Success Checkmark Icon (GIF from assets) -->
+          <img
+            src="assets/image/successAnimationForm.gif"
+            alt="success"
+            class="h-[200px] w-[250px]"
+          />
+        </div>
+        <h3 class="text-[30px] font-sora font-bold text-green-600">
+          Pendaftaran Berhasil!
+        </h3>
+        <p class="text-gray-600 mt-4">
+          Terima kasih! Anda telah berhasil terdaftar, kami akan segera
+          menghubungi Anda melalui email.
+        </p>
+
+        <!-- Button to return to home page, centered -->
+        <div class="flex justify-center my-11">
+          <button
+            (click)="goToHome()"
+            class="bg-[#F2F2F2] text-secondary px-8 py-3 font-medium rounded-xl hover:bg-slate-300 transition duration-300 ease-in-out flex items-center justify-center group hover:-translate-y-1 hover:scale-100 shadow-lg delay-150"
+          >
+            <img
+              src="assets/image/icons/arrow-clockwise.svg"
+              alt="refresh"
+              class="h-6 w-6 mr-2"
+            />
+            Kembali ke Beranda
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

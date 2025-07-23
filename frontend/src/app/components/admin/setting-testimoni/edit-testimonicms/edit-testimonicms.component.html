@@ -1,0 +1,130 @@
+<div class="bg-white my-11 p-8 shadow-md rounded-lg max-w-6xl mx-auto">
+  <form (ngSubmit)="onSubmit()">
+    <div *ngIf="isLoading" class="text-center p-5 text-blue-500">
+      <p>Memuat detail testimoni...</p>
+    </div>
+    <div *ngIf="errorMessage" class="text-center p-5 text-red-500">
+      <p>{{ errorMessage }}</p>
+    </div>
+    <div *ngIf="successMessage" class="text-center p-5 text-green-500">
+      <p>{{ successMessage }}</p>
+    </div>
+
+    <label class="text-secondary text-sm font-medium">Foto Profile <span class="text-red-500">*</span></label>
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-start space-x-4">
+        <div class="w-[100px] mt-2 h-[100px] bg-gray-100 border border-gray-300 rounded-md overflow-hidden flex items-center justify-center">
+          <img
+            *ngIf="imagePreview"
+            [src]="imagePreview"
+            alt="Image Preview"
+            class="object-cover w-full h-full"
+          />
+          <span *ngIf="!imagePreview" class="text-gray-400">Preview</span>
+        </div>
+    
+        <div class="flex flex-col justify-center space-y-2">
+          <button
+            type="button"
+            class="bg-blue-50 text-primary mt-7 border border-blue-400 rounded-lg px-3 py-2"
+            (click)="fileInput.click()"
+          >
+            Unggah
+          </button>
+          <button
+            *ngIf="imagePreview"
+            type="button"
+            class="text-red-500 hover:text-red-700 border border-red-500 rounded-lg px-3 py-2"
+            (click)="removeImage()"
+          >
+            Hapus
+          </button>
+          <input
+            #fileInput
+            type="file"
+            accept="image/*"
+            class="hidden"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+      </div>
+    
+      <div class="flex flex-col items-center space-y-2">
+        <label class="text-secondary text-sm font-medium">Status</label>
+        <label class="flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            name="status" [(ngModel)]="status"
+            class="sr-only peer"
+          />
+          <div
+            class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+          ></div>
+          <span
+            class="ml-3 text-sm font-medium"
+            [class.text-blue-600]="status"
+            [class.text-gray-700]="!status"
+          >
+            {{ status ? 'Publish' : 'Private' }}
+          </span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-medium mb-2" for="name">
+        Nama <span class="text-red-500">*</span>
+      </label>
+      <input
+        id="name"
+        name="name" type="text"
+        [(ngModel)]="name"
+        required
+        class="w-full p-3 border border-gray-300 rounded-md"
+        placeholder="Masukkan Nama"
+      />
+    </div>
+    
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-medium mb-2" for="job">
+        Pekerjaan <span class="text-red-500">*</span>
+      </label>
+      <input
+        id="job"
+        name="job" type="text"
+        [(ngModel)]="employment"
+        required
+        class="w-full p-3 border border-gray-300 rounded-md"
+        placeholder="Masukkan Pekerjaan"
+      /> 
+    </div>
+    
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-medium mb-2" for="testimoni">
+        Testimoni <span class="text-red-500">*</span>
+      </label>
+      <textarea
+        id="testimoni"
+        name="testimoni" [(ngModel)]="testimoniContent" class="w-full p-3 border border-gray-300 rounded-md resize-none"
+        rows="5"
+        maxlength="250"
+        placeholder="Masukkan Testimoni Anda"
+      ></textarea>
+      <div class="text-right text-sm text-gray-400">
+        {{ testimoniContent.length }}/250 </div>
+    </div>
+    
+    <div class="flex justify-end mt-11 space-x-4">
+      <button
+        type="button"
+        class="text-secondary border border-gray-300 rounded-lg px-6 py-2 hover:bg-gray-100 transition-colors"
+        (click)="goBack()" >
+        Batal
+      </button>
+      <button
+        type="submit" [disabled]="isLoading" class="bg-primary text-white rounded-lg px-6 py-3 hover:bg-blue-700 transition-colors"
+      >
+        {{ isLoading ? 'Menyimpan...' : 'Simpan Perubahan' }} </button>
+    </div>
+  </form>
+</div>

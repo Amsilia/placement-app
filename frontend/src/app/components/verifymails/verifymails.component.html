@@ -1,0 +1,9 @@
+<div class="verify-container">
+  <p>{{ message }}</p>
+  <a
+    *ngIf="message === 'Email berhasil diverifikasi. Silakan login.'"
+    routerLink="/login"
+  >
+    Klik di sini untuk login
+  </a>
+</div>

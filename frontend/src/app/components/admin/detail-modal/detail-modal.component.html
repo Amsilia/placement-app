@@ -1,0 +1,150 @@
+<div *ngIf="isVisible" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm p-4">
+  <div class="bg-white w-full max-w-2xl mx-auto rounded-2xl shadow-2xl transform transition-all duration-300 scale-100 opacity-100 max-h-[90vh] overflow-y-auto">
+    <!-- Header -->
+    <div class="sticky top-0 bg-white rounded-t-2xl px-8 py-6 border-b border-gray-100">
+      <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+          <div class="w-1 h-6 bg-blue-500 rounded-full mr-3"></div>
+          Detail Data
+        </h2>
+        <button (click)="close()" class="group relative p-2 rounded-xl bg-gray-50 hover:bg-red-50 transition-all duration-200 border border-gray-200 hover:border-red-200">
+          <svg class="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="px-8 py-6 space-y-8">
+      <!-- Full Name Section -->
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
+        <div class="flex items-center mb-2">
+          <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+          <p class="text-blue-700 font-medium text-sm uppercase tracking-wide">Nama Lengkap</p>
+        </div>
+        <p class="font-bold text-xl text-gray-800">{{ displayData.fullname || '-' }}</p>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="space-y-6">
+        <h3 class="text-lg font-semibold text-gray-700 flex items-center">
+          <div class="w-5 h-5 bg-green-500 rounded-full mr-2 flex items-center justify-center">
+            <div class="w-2 h-2 bg-white rounded-full"></div>
+          </div>
+          Informasi Kontak
+        </h3>
+        
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
+            <div class="flex-1">
+              <p class="text-gray-500 font-medium text-sm mb-1">Nomor WhatsApp</p>
+              <p class="font-semibold text-lg text-gray-800 flex items-center">
+                {{ displayData.no_handphone || '-' }}
+                <button (click)="copyToClipboard('phone', displayData.no_handphone)" 
+                        class="ml-3 p-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-all duration-200 group">
+                  <img
+                    [src]="isCopied['phone'] ? 'assets/image/cms/icons/check.svg' : 'assets/image/cms/icons/copy.svg'"
+                    alt="Copy Icon"
+                    class="w-4 h-4 group-hover:scale-110 transition-transform"
+                  />
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Information -->
+      <div class="space-y-6">
+        <h3 class="text-lg font-semibold text-gray-700 flex items-center">
+          <div class="w-5 h-5 bg-purple-500 rounded-full mr-2 flex items-center justify-center">
+            <div class="w-2 h-2 bg-white rounded-full"></div>
+          </div>
+          Informasi Personal
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <p class="text-gray-500 font-medium text-sm mb-2">Usia</p>
+            <p class="font-semibold text-xl text-gray-800">{{ displayData.age || '-' }}</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <p class="text-gray-500 font-medium text-sm mb-2">Status Pekerjaan</p>
+            <p class="font-semibold text-xl text-gray-800">{{ displayData.employment_status || '-' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education Information -->
+      <div class="space-y-6">
+        <h3 class="text-lg font-semibold text-gray-700 flex items-center">
+          <div class="w-5 h-5 bg-orange-500 rounded-full mr-2 flex items-center justify-center">
+            <div class="w-2 h-2 bg-white rounded-full"></div>
+          </div>
+          Informasi Pendidikan
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <p class="text-gray-500 font-medium text-sm mb-2">Pendidikan Terakhir</p>
+            <p class="font-semibold text-xl text-gray-800">{{ displayData.last_education || '-' }}</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <p class="text-gray-500 font-medium text-sm mb-2">Nama Institusi</p>
+            <p class="font-semibold text-xl text-gray-800">{{ displayData.institution || '-' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Package & Document Information -->
+      <div class="space-y-6 border-t border-gray-200 pt-8">
+        <h3 class="text-lg font-semibold text-gray-700 flex items-center">
+          <div class="w-5 h-5 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
+            <div class="w-2 h-2 bg-white rounded-full"></div>
+          </div>
+          Informasi Paket & Dokumen
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6 shadow-sm">
+            <p class="text-green-700 font-medium text-sm mb-2">Harga Paket</p>
+            <p class="font-bold text-2xl text-green-800">{{ displayData.price | currency:'IDR':'symbol':'1.0-0':'id' }}</p>
+          </div>
+          
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <p class="text-gray-500 font-medium text-sm mb-3">Berkas Dokumen</p>
+            <div *ngIf="displayData.documentUrl" class="flex items-center justify-between bg-gray-50 rounded-lg p-4 border border-gray-200">
+              <div class="flex items-center flex-1">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                </div>
+                <span class="text-gray-800 font-medium truncate">{{ displayData.documentName || 'Dokumen' }}</span>
+              </div>
+              <a [href]="displayData.documentUrl" target="_blank" 
+                 class="ml-3 p-2 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors group">
+                <img
+                  src="assets/image/cms/icons/download.svg"
+                  alt="Download Icon"
+                  class="w-5 h-5 group-hover:scale-110 transition-transform"
+                />
+              </a>
+            </div>
+            <div *ngIf="!displayData.documentUrl" class="flex items-center justify-center bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <div class="text-center">
+                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                </div>
+                <p class="text-gray-500 font-medium">Tidak ada dokumen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

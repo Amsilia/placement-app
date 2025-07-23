@@ -1,0 +1,16 @@
+<div class="grid grid-cols-[auto_1fr] h-screen bg-[#f1f5fc]">
+  <app-sidebar (sidebarToggle)="onSidebarToggle($event)"></app-sidebar>
+
+  <div
+    [ngClass]="isMinimized ? 'ml-[100px]' : 'ml-[300px]'"
+    class="transition-all duration-300 ease-in-out bg-[#f1f5fc]"
+  >
+    <app-header-admin></app-header-admin>
+
+    <!-- Component Batch data -->
+    <app-batchdata-admin
+      *ngIf="!isLoading && !errorMessage"
+      [batches]="batches"
+    ></app-batchdata-admin>
+  </div>
+</div>

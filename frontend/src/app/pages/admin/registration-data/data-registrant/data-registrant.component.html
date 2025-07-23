@@ -1,0 +1,299 @@
+<div class="grid grid-cols-[auto_1fr] h-screen bg-[#f1f5fc]">
+  <app-sidebar (sidebarToggle)="onSidebarToggle($event)"></app-sidebar>
+
+  <div
+    [ngClass]="isMinimized ? 'ml-[100px]' : 'ml-[300px]'"
+    class="transition-all duration-300 ease-in-out bg-[#f1f5fc]"
+  >
+    <app-header-admin></app-header-admin>
+
+    <div class="p-6">
+      <h1 class="text-[24px] text-brith font-semibold font-sora my-2">
+        Data Pendaftar
+      </h1>
+      <p class="text-[16px] text-brith font-inter">
+        <span class="text-[#959EA9]">Data Pendaftar</span>
+        <span *ngIf="batchName"> / {{ batchName }} ({{ batchPeriod }})</span>
+        </p>
+
+      <div class="p-5 my-7 bg-white shadow-md rounded-xl">
+        <div class="flex items-center justify-between mb-10">
+          <div class="relative flex-grow mr-4">
+            <img
+              src="assets/image/cms/icons/search.svg"
+              alt=""
+              class="absolute left-3 top-1/2 transform -translate-y-1/2"
+            />
+            <input
+              type="text"
+              placeholder="Cari data disini..."
+              class="w-[350px] h-[50px] pl-10 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              [ngModel]="searchQuery"  (input)="onSearchInput($event)" />
+          </div>
+
+          <button
+            (click)="exportToExcel()"
+            class="flex items-center p-3 border border-primary text-primary rounded-xl hover:bg-primary/50 mr-4 hover:text-white"
+          >
+            <span class="font-medium text-[14px]">Export</span>
+            <img
+              src="assets/image/cms/icons/fileex.svg"
+              alt="export"
+              class="w-4 h-4 ml-2"
+            />
+          </button>
+
+          <button
+            (click)="toggleFilterOptions()"
+            class="p-2 border border-primary w-[50px] h-[50px] text-primary rounded-lg hover:bg-primary/50 mr-4 hover:bgpr"
+          >
+            <img
+              src="assets/image/cms/icons/sliders.svg"
+              alt="sliders"
+              class="ml-2 w-4"
+            />
+          </button>
+
+          <div class="relative">
+            <button
+              (click)="toggleSortOptions()"
+              class="flex items-center p-3 border border-primary text-primary hover:text-white rounded-xl hover:bg-primary/50"
+            >
+              <span class="mr-2 font-medium">Sort By</span>
+              <img
+                src="assets/image/cms/icons/chevron-down.svg"
+                alt="chevron icon"
+              />
+            </button>
+
+            <div
+              *ngIf="sortOptionsVisible"
+              class="absolute right-0 mt-2 w-[250px] bg-white shadow-lg rounded-lg z-10 p-4"
+            >
+              <button
+                class="absolute top-3 rounded-full right-2 text-2xl w-8 h-8 text-secondary"
+                (click)="toggleSortOptions()"
+              >
+                &times;
+              </button>
+              <ul class="text-left p-2 mt-6">
+                <li
+                  class="p-2 my-3 hover:bg-gray-100 cursor-pointer border-b"
+                  (click)="sortData('name_asc')"
+                >
+                  A ke Z (Nama Lengkap)
+                </li>
+                <li
+                  class="p-2 my-3 hover:bg-gray-100 cursor-pointer border-b"
+                  (click)="sortData('name_desc')"
+                >
+                  Z ke A (Nama Lengkap)
+                </li>
+                <li
+                  class="p-2 my-3 hover:bg-gray-100 cursor-pointer border-b"
+                  (click)="sortData('date_newest')"
+                >
+                  Tanggal Daftar Terbaru
+                </li>
+                <li
+                  class="p-2 hover:bg-gray-100 cursor-pointer"
+                  (click)="sortData('date_oldest')"
+                >
+                  Tanggal Daftar Terlama
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="filterOptionsVisible"
+          class="absolute z-20 right-8 mt-2 w-[300px] bg-white shadow-lg rounded-lg border border-gray-200"
+        >
+          <div class="p-4 space-y-4 relative">
+            <button
+              class="absolute top-3 right-3 text-2xl text-secondary"
+              (click)="toggleFilterOptions()"
+            >
+              &times;
+            </button>
+
+            <div class="w-full mt-6">
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Status</label
+              >
+              <select
+                [(ngModel)]="selectedStatus"
+                (change)="onFilterChange()"
+                class="w-full p-2.5 text-gray-500 bg-white border rounded-lg appearance-none focus:outline-none"
+              >
+                <option [ngValue]="null">Pilih Salah Satu</option>
+                <option value="Menunggu">Menunggu</option>
+                <option value="Diterima">Diterima</option>
+                <option value="Berlangsung">Berlangsung</option>
+                <option value="Ditolak">Ditolak</option>
+                <option value="Selesai">Selesai</option>
+              </select>
+              <img
+                src="assets/image/cms/icons/chevron-down-black.svg"
+                class="absolute right-8 top-16 transform translate-y-1 pointer-events-none w-4 h-4"
+                alt="chevron"
+              />
+            </div>
+
+            <div class="w-full">
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Paket</label
+              >
+              <select
+                [(ngModel)]="selectedPriceType"
+                (change)="onFilterChange()"
+                class="w-full p-2.5 text-gray-500 bg-white border rounded-lg appearance-none focus:outline-none"
+              >
+                <option [ngValue]="null">Pilih Salah Satu</option>
+                <option value="Normal Price">Normal Price</option>
+                <option value="Special Price">Special Price</option>
+              </select>
+              <img
+                src="assets/image/cms/icons/chevron-down-black.svg"
+                class="absolute right-8 top-[155px] transform translate-y-15 pointer-events-none w-4 h-4"
+                alt="chevron"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <div *ngIf="loading" class="text-center py-8 text-gray-500">Loading data pendaftar...</div>
+          <div *ngIf="errorMessage" class="text-center py-8 text-red-600 font-semibold">
+            {{ errorMessage }}
+          </div>
+
+          <table *ngIf="!loading && !errorMessage && registrants.length > 0" class="min-w-full text-center text-sm">
+            <thead>
+              <tr class="border-b text-brith">
+                <th class="p-1">
+                  <input
+                    type="checkbox"
+                    (change)="onSelectAll($event)"
+                  />
+                </th>
+                <th class="p-5">Tanggal Daftar</th>
+                <th class="p-5">Nama Lengkap</th>
+                <th class="p-5">Paket</th>
+                <th class="p-5">Status</th>
+                <th class="p-5">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let registrant of registrants; let i = index"
+                class="border-b"
+              >
+                <td class="p-3">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="registrant.selected"
+                    (change)="onSingleSelect()"
+                    class="cursor-pointer"
+                  />
+                </td>
+                <td class="p-3 text-secondary">
+                  {{ registrant.registeredDate | date : "dd/MM/yyyy" }}
+                </td>
+                <td class="p-3 text-secondary">{{ registrant.fullname }}</td>
+                <td class="p-3 text-secondary">{{ registrant.price }}</td>
+                <td class="p-3">
+                    <span
+                        *ngIf="registrant.status === 'Menunggu'"
+                        class="w-full px-5 text-white py-2 bg-[#FF9807] rounded-full text-center"
+                    >
+                        Menunggu
+                    </span>
+                    <span
+                        *ngIf="registrant.status === 'Diterima'"
+                        class="w-full px-7 text-white py-2 bg-[#198754] rounded-full text-center"
+                    >
+                        Diterima
+                    </span>
+                    <span
+                        *ngIf="registrant.status === 'Berlangsung'"
+                        class="w-full px-4 text-white py-2 bg-[#212529] rounded-full text-center"
+                    >
+                        Berlangsung
+                    </span>
+                    <span
+                        *ngIf="registrant.status === 'Ditolak'"
+                        class="w-full px-8 text-white py-2 bg-[#BB2D3B] rounded-full text-center"
+                    >
+                        Ditolak
+                    </span>
+                    <span
+                        *ngIf="registrant.status === 'Selesai'"
+                        class="w-full px-8 text-white py-2 bg-[#6C757D] rounded-full text-center"
+                    >
+                        Selesai
+                    </span>
+                    </td>
+                <td class="p-3 space-x-4">
+                  <button
+                    (click)="onDetail(registrant)"
+                    class="text-blue-500 hover:text-blue-700"
+                    [disabled]="isAnySelected"
+                  >
+                    Detail
+                  </button>
+                  <button
+                    (click)="onEdit(registrant)"
+                    class="text-green-500 hover:text-green-700"
+                    [disabled]="isAnySelected"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    (click)="onDelete(registrant.id)"
+                    class="text-red-500 hover:text-red-700"
+                  >
+                    Hapus
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="!loading && !errorMessage && registrants.length === 0" class="text-center py-8 text-gray-500">
+            Tidak ada data pendaftar yang ditemukan.
+          </div>
+        </div>
+
+        <app-pagination
+          [totalItems]="totalItems"
+          [itemsPerPage]="itemsPerPage"
+          [currentPage]="currentPage"
+          (pageChange)="onPageChange($event)"
+          (itemsPerPageChange)="onItemsPerPageChange($event)"
+        ></app-pagination>
+      </div>
+    </div>
+
+    <app-detail-modal
+      [isVisible]="isModalVisible"
+      [registrant]="selectedRegistrant"
+      (closeModal)="closeModal()"
+    ></app-detail-modal>
+
+    <app-edit-modal
+      [isVisible]="isEditModalVisible"
+      [registrant]="selectedRegistrant"
+      (closeModal)="closeEditModal()"
+      (saveData)="saveEditedData($event)"
+    ></app-edit-modal>
+
+    <app-delete-modal
+      [isVisible]="isDeleteModalVisible"
+      [isAnySelected]="isAnySelected"
+      (confirmDelete)="confirmDelete()"
+      (closeModal)="closeDeleteModal()"
+    ></app-delete-modal>
+  </div>
+</div>

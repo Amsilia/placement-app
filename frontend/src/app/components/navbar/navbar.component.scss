@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+    nav {
+      .mobile-menu {
+        display: none;
+        &.active {
+          display: block;
+        }
+      }
+    }
+  }
+
+  
+  

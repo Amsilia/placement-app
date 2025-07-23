@@ -1,0 +1,42 @@
+<!-- toast.component.html -->
+<div
+  *ngIf="isVisible"
+  class="fixed top-4 right-4 w-80 p-4 rounded-lg shadow-lg flex items-center space-x-4 bg-white border-l-4 z-[9999]"
+  [ngClass]="{
+    'border-red-500 bg-red-50': type === 'error',
+    'border-green-500 bg-green-50': type === 'success'
+  }"
+>
+  <!-- Icon -->
+  <div
+    class="flex items-center justify-center w-8 h-8 rounded-full"
+    [ngClass]="{
+      'bg-red-100': type === 'error',
+      'bg-green-100': type === 'success'
+    }"
+  >
+    <span *ngIf="type === 'error'" class="text-red-500">!</span>
+    <span *ngIf="type === 'success'" class="text-green-500">✓</span>
+  </div>
+
+  <!-- Text -->
+  <div>
+    <p class="font-semibold">{{ title }}</p>
+    <p class="text-sm text-gray-600">{{ message }}</p>
+  </div>
+
+  <!-- Close button -->
+  <button
+    (click)="hideToast()"
+    class="ml-auto text-gray-400 hover:text-gray-600 text-lg"
+  >
+    &times;
+  </button>
+
+  <!-- Progress bar -->
+  <div
+    class="absolute bottom-0 left-0 h-1 bg-red-500 transition-all duration-[3000ms]"
+    [style.width.%]="progress"
+    *ngIf="type === 'error'"
+  ></div>
+</div>

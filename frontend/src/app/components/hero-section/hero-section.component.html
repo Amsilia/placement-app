@@ -1,0 +1,47 @@
+<section class="relative h-screen flex items-center overflow-hidden bg-[#FFFFFF]" id="home">
+  <div class="container mx-auto px-6 lg:px-24 flex items-center justify-between">
+    <!-- Left Content -->
+    <div class="relative z-10 max-w-2xl mt-14">
+      <!-- BATCH 1 Text and Gradient Line -->
+      <div class="flex items-center mb-2">
+        <!-- images Flower -->
+        <img src="assets/image/blog/petala2.png" alt="Flower 1" class="absolute top-24 right-56 transform translate-x-[-630%] translate-y-[-330%] w-[58.79px] h-[57.53px] opacity-70">
+        <img src="assets/image/blog/petala2.png" alt="Flower 1" class="absolute top-24 right-56 transform translate-x-[-600%] translate-y-[-650%] w-[30.79px] h-[30.53px] opacity-40">
+        <img src="assets/image/blog/petala2.png" alt="Flower 1" class="absolute top-24 right-56 transform translate-x-[-1070%] translate-y-[-750%] w-[27.79px] h-[27.53px] opacity-30">
+        <img src="assets/image/blog/petala3.png" alt="Flower 1" class="absolute top-24 right-56 transform translate-x-[-600%] translate-y-[-380%] w-[40.43px] h-[40.15px] opacity-40">
+
+        <!-- Title -->
+        <h2 class="font-bold text-[30px] font-sora tracking-[12px] whitespace-nowrap mr-2 bg-gradient-to-r from-[#FE302B] to-[#FE4D25] bg-clip-text text-transparent">
+        {{sites?.subline}}
+        </h2>
+        <div class="h-[2px] flex-grow bg-gradient-to-r from-[#FE302B] to-[#FE4D25]"></div>
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="text-[53px] font-bold mb-4 font-sora">
+        <span class="whitespace-normal">{{sites?.hero_title}}</span><br>
+
+      </h1>
+
+      <!-- Description Paragraph -->
+      <p class="text-xl text-secondary font-inter text-justify leading-[30px]">
+        {{sites?.hero_desc}}
+      </p>
+    </div>
+
+    <!-- Right Image Container -->
+    <div class="relative flex-1 hidden lg:block ml-8">
+      <div class="absolute inset-0 bg-gradient-to-r from-pink-100 to-red-50 rounded-full blur-3xl opacity-20"></div>
+      <img
+        [src]="imagePath"
+        alt="Torii Gate Japan"
+        class="relative w-full h-auto max-w-xl object-contain ml-auto"
+      >
+    </div>
+  </div>
+
+  <!-- Background Decorative Elements -->
+  <div class="absolute top-0 right-0 -z-10">
+    <div class="w-96 h-96 bg-pink-50 rounded-full blur-3xl opacity-20"></div>
+  </div>
+</section>
